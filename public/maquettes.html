@@ -7,11 +7,8 @@
 <meta name="description" content="Maquettes interactives des bornes tablettes du Village de l'Innovation, Benin Digital & Innovation Week 2026.">
 <link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/fonts/Bricolage-Grotesque.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/kiosk.css">
+<link rel="stylesheet" href="/assets/vitrine.css">
 <style>
-  html,body{height:auto;overflow:auto}
-  body{-webkit-user-select:auto;user-select:auto}
-  .lumiere{position:absolute;height:1100px;-webkit-mask:linear-gradient(#000 55%,transparent);mask:linear-gradient(#000 55%,transparent)}
   .page{position:relative;z-index:1;max-width:1360px;margin:0 auto;padding:0 32px}
   .tete{padding:40px 0}
   .tete .logo{height:52px;color:var(--clair)}
@@ -177,7 +174,19 @@
 </div>
 <script>
   const ro = new ResizeObserver((es) => es.forEach((e) => { const f = e.target.querySelector("iframe"); f.style.transform = `scale(${e.contentRect.width / (e.target.classList.contains("ecran-p") ? 390 : e.target.classList.contains("ecran-d") ? 1280 : 820)})`; }));
-  document.querySelectorAll(".ecran-t, .ecran-p, .ecran-d").forEach((el) => ro.observe(el));
+  document.querySelectorAll(".ecran-t, .ecran-p, .ecran-d").forEach((el) => {
+    ro.observe(el);
+    // Bouton d'activation : la page défile librement, la maquette ne capte les gestes qu'une fois touchée
+    const b = document.createElement("button");
+    b.className = "activer"; b.type = "button"; b.innerHTML = "<span>Toucher pour essayer</span>";
+    b.setAttribute("aria-label", "Essayer la maquette : " + el.querySelector("iframe").title);
+    b.addEventListener("click", () => { document.querySelectorAll(".actif").forEach((x) => x.classList.remove("actif")); el.classList.add("actif"); });
+    el.append(b);
+  });
+  // Une maquette activée redevient inerte dès qu'elle sort de l'écran ou qu'on touche ailleurs
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting) e.target.classList.remove("actif"); }), { threshold: 0.35 });
+  document.querySelectorAll(".ecran-t, .ecran-p, .ecran-d").forEach((el) => io.observe(el));
+  document.addEventListener("pointerdown", (e) => { if (!e.target.closest(".actif")) document.querySelectorAll(".actif").forEach((x) => x.classList.remove("actif")); });
 </script>
 </body>
 </html>

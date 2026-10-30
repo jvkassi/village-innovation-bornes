@@ -1,0 +1,25 @@
+/* Vitrine des maquettes : une page web ordinaire (défilement, sélection), pas une borne. */
+@font-face{font-family:"Bricolage Grotesque";src:url(/fonts/Bricolage-Grotesque.woff2) format("woff2");font-weight:200 800;font-stretch:75% 100%;font-display:swap}
+:root{--nuit:#061430;--cyan:#00FFFF;--clair:#F3F6FB;--doux:rgba(243,246,251,.68);--trait:rgba(243,246,251,.16);--f:"Bricolage Grotesque",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--nuit);scroll-behavior:smooth}
+body{min-height:100vh;background:var(--nuit);color:var(--clair);font-family:var(--f);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--cyan);color:var(--nuit)}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
+ol,ul{list-style:none}
+.logo{background:currentColor;-webkit-mask:var(--src) left center/contain no-repeat;mask:var(--src) left center/contain no-repeat}
+.logo-side{--src:url(/brand/lockup-side.svg);aspect-ratio:1600/510}
+.lumiere{position:absolute;inset:0 0 auto;height:1100px;pointer-events:none;z-index:0;
+  background:radial-gradient(120% 70% at 100% 105%,rgba(0,255,255,.22),transparent 55%),radial-gradient(90% 60% at 0% 100%,rgba(0,48,250,.35),transparent 60%);
+  -webkit-mask:linear-gradient(#000 55%,transparent);mask:linear-gradient(#000 55%,transparent)}
+
+/* Les maquettes restent inertes pendant qu'on fait défiler la page ; un toucher les active */
+.ecran-t,.ecran-p,.ecran-d{isolation:isolate}
+.ecran-t iframe,.ecran-p iframe,.ecran-d iframe{pointer-events:none}
+.actif iframe{pointer-events:auto}
+.activer{position:absolute;inset:0;z-index:2;display:flex;align-items:flex-end;justify-content:center;padding-bottom:9%;border:0;cursor:pointer;
+  background:linear-gradient(transparent 60%,rgba(6,20,48,.55));opacity:0;transition:opacity .2s;font:inherit;color:var(--clair)}
+.activer span{background:var(--cyan);color:var(--nuit);font-weight:600;font-size:14px;border-radius:999px;padding:9px 16px;box-shadow:0 8px 24px -8px rgba(0,0,0,.6)}
+figure:hover .activer,.activer:focus-visible{opacity:1}
+@media (hover:none){.activer{opacity:1;background:linear-gradient(transparent 70%,rgba(6,20,48,.5))}}
+.actif .activer{display:none}

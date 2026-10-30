@@ -272,3 +272,17 @@ pre.acces{white-space:pre-wrap;background:#f6f8fc;border:1px solid var(--trait);
 .onglets button,.etat-pub,.badge-maquette,.actions-tete .btn{white-space:nowrap}
 .maquette .actions-tete a.btn{display:none}
 @media (max-width:1280px){.etat-pub{display:none}}
+/* Écrans étroits : l'en-tête passe sur deux lignes, les onglets défilent dans leur bande */
+@media (max-width:900px){
+  .tete{height:auto;flex-wrap:wrap;padding:10px 16px;gap:8px 12px}
+  .onglets{order:3;width:100%;height:44px;overflow-x:auto;scrollbar-width:none}
+  .onglets button{flex:none}
+  .actions-tete{flex-wrap:wrap;justify-content:flex-end}
+  .actions-tete a.btn,#btn-historique{display:none}
+  .prog,.demandes,.suivi{padding:20px 16px}
+  .prog-tete,.suivi-tete{flex-direction:column;align-items:stretch}
+  .demande header{flex-direction:column;align-items:stretch}
+  .diff{display:block;overflow-x:auto}
+  .tableau,.prog-table{display:block;overflow-x:auto}
+}
+@media (max-width:900px){.suivi-grille{grid-template-columns:minmax(0,1fr)}.chiffres{grid-template-columns:repeat(2,minmax(0,1fr))}.chiffre b{font-size:30px}}
