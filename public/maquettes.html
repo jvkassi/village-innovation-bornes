@@ -43,6 +43,10 @@
   .attendus li{display:flex;justify-content:space-between;gap:24px;padding:20px 0;border-bottom:1px solid var(--trait);font-size:17px}
   .attendus em{font-style:normal;color:var(--doux);white-space:nowrap}
   .attendus em.recu{color:var(--cyan)}
+  .maquettes a{display:flex;flex-direction:column;gap:4px;width:100%;text-decoration:none;color:var(--clair)}
+  .maquettes a b{font-weight:600;font-size:18px}
+  .maquettes a span{color:var(--doux);font-size:15px}
+  .maquettes a:hover b{color:var(--cyan)}
   footer{margin-top:120px;padding:32px 0 56px;border-top:1px solid var(--trait);color:var(--doux);font-size:14px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   @media (max-width:1100px){.bornes{grid-template-columns:repeat(2,minmax(0,1fr))}.intro{grid-template-columns:1fr}}
   @media (max-width:760px){section.suite{grid-template-columns:1fr}dl{grid-template-columns:1fr}}
@@ -76,10 +80,21 @@
       <figcaption><div><b>Stand d'exposant</b><span>ANIP, 1 solution</span></div><a href="/kiosk.html?espace=anip&maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener">Plein écran</a></figcaption>
     </figure>
     <figure>
-      <div class="telephone"><div class="ecran-p"><iframe title="Application visiteur" src="/?maquette=1&simule=2026-11-18T11:20"></iframe></div></div>
-      <figcaption><div><b>Sur le téléphone</b> <span>Le public, sur son téléphone</span></div><a href="/?maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener">Ouvrir</a></figcaption>
+      <div class="telephone"><div class="ecran-p"><iframe title="Application visiteur" src="/v/?maquette=1&simule=2026-11-18T11:20"></iframe></div></div>
+      <figcaption><div><b>Sur le téléphone</b> <span>Le public, sur son téléphone</span></div><a href="/v/?maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener">Ouvrir</a></figcaption>
     </figure>
   </div>
+
+  <section class="suite">
+    <h2>Les maquettes</h2>
+    <ol class="attendus maquettes">
+      <li><a href="/kiosk.html?espace=accueil&maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener"><b>Tablette d'accueil</b><span>À l'entrée du Village : annuaire des exposants, prochaine session, QR de l'application.</span></a></li>
+      <li><a href="/kiosk.html?espace=apiex&maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener"><b>Borne de stand</b><span>Présentation de l'exposant, solutions à essayer, fiche à emporter.</span></a></li>
+      <li><a href="/kiosk.html?espace=apiex&maquette=1&simule=2026-11-18T11:20&veille=1" target="_blank" rel="noopener"><b>Écran de veille</b><span>Ce que montre la borne entre deux visiteurs.</span></a></li>
+      <li><a href="/v/?maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener"><b>Application du public</b><span>Sur le téléphone du visiteur, sans rien installer : exposants, programme, plan, mes stands.</span></a></li>
+      <li><a href="/admin" target="_blank" rel="noopener"><b>Espace de gestion</b><span>Pour l'équipe du MTDI : exposants, programme, publication, suivi des tablettes en direct. Accès réservé.</span></a></li>
+    </ol>
+  </section>
 
   <section class="suite">
     <h2>Comment fonctionne une borne</h2>

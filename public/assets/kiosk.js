@@ -20,7 +20,7 @@
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const absolue = (u) => new URL(u, location.origin).href;
-  const lienApp = (id) => `${location.origin}/${id ? "#/exposant/" + encodeURIComponent(id) : ""}`;
+  const lienApp = (id) => `${location.origin}/v/${id ? "#/exposant/" + encodeURIComponent(id) : ""}`;
 
   /* ---------- Pictogrammes (trait 1.5, grille 24) ---------- */
   const P = {
