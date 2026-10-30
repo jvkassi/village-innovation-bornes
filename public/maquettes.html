@@ -33,6 +33,13 @@
   figcaption b{font-weight:600;font-size:19px}
   figcaption span{display:block;color:var(--doux);font-size:15px;margin-top:3px}
   figcaption a{color:var(--cyan);font-weight:600;font-size:15px;text-decoration:underline;text-underline-offset:4px;white-space:nowrap}
+  .rubrique{display:grid;grid-template-columns:1fr 2fr;gap:48px;align-items:end;margin:40px 0 32px;padding-top:40px;border-top:1px solid var(--trait)}
+  .rubrique h2{font-weight:300;font-stretch:88%;font-size:clamp(32px,3.6vw,48px);line-height:1;letter-spacing:-.03em}
+  .rubrique p{font-size:17px;line-height:1.55;color:var(--doux);max-width:60ch}
+  .bornes + .rubrique{margin-top:88px}
+  .illustration + .rubrique{margin-top:88px}
+  .bornes.plus{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .illustration{margin-top:22px;font-size:14px;color:var(--doux)}
   section.suite{margin-top:120px;display:grid;grid-template-columns:1fr 2fr;gap:48px;padding-top:40px;border-top:1px solid var(--trait)}
   section.suite h2{font-weight:300;font-stretch:88%;font-size:clamp(32px,3.6vw,48px);line-height:1;letter-spacing:-.03em}
   dl{display:grid;grid-template-columns:1fr 1fr;column-gap:48px}
@@ -49,7 +56,7 @@
   .maquettes a:hover b{color:var(--cyan)}
   footer{margin-top:120px;padding:32px 0 56px;border-top:1px solid var(--trait);color:var(--doux);font-size:14px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   @media (max-width:1100px){.bornes{grid-template-columns:repeat(2,minmax(0,1fr))}.intro{grid-template-columns:1fr}}
-  @media (max-width:760px){section.suite{grid-template-columns:1fr}dl{grid-template-columns:1fr}}
+  @media (max-width:760px){section.suite,.rubrique{grid-template-columns:1fr;gap:16px}dl{grid-template-columns:1fr}}
   @media (max-width:560px){.page{padding:0 16px}.bornes{grid-template-columns:1fr}.intro{padding:40px 0 56px}.attendus li{flex-direction:column;gap:4px}}
 </style>
 </head>
@@ -61,63 +68,79 @@
   <section class="intro">
     <h1>Le Village, le jour J</h1>
     <div>
-      <p>Mercredi 18 novembre, 11 h 20, Palais des Congrès de Cotonou. Voici ce que voient les visiteurs : la tablette d'accueil à l'entrée, la borne de chaque stand, et le Village sur leur téléphone.</p>
-      <p><strong>Tout est interactif.</strong> Touchez les écrans comme sur place ; sans toucher, la borne passe en veille au bout de 45 secondes.</p>
+      <p>Mercredi 18 novembre, 11 h 20, Palais des Congrès de Cotonou. Chaque espace a sa tablette, en portrait, aux couleurs du Village. Un toucher ouvre la solution ; sans toucher, la tablette revient seule à l'accueil.</p>
+      <p><strong>Tout est interactif.</strong> Touchez les écrans comme sur place.</p>
     </div>
   </section>
 
+  <div class="rubrique"><h2>Les trois gabarits</h2><p>Une tablette dédiée à une solution, ou qui en regroupe deux ou quatre. La mise en page s'adapte seule au nombre de boutons.</p></div>
   <div class="bornes">
     <figure>
-      <div class="tablette"><div class="ecran-t"><iframe title="Tablette d'accueil" src="/kiosk.html?espace=accueil&maquette=1&simule=2026-11-18T11:20"></iframe></div></div>
-      <figcaption><div><b>Accueil du Village</b><span>Annuaire, programme, QR</span></div><a href="/kiosk.html?espace=accueil&maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener">Plein écran</a></figcaption>
+      <div class="tablette"><div class="ecran-t"><iframe title="1 bouton" src="/kiosk.html?espace=anip&maquette=1&simule=2026-11-18T11:20" loading="lazy"></iframe></div></div>
+      <figcaption><div><b>1 bouton</b><span>Tablette dédiée à une solution</span></div><a href="/kiosk.html?espace=anip&maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener">Plein écran</a></figcaption>
     </figure>
     <figure>
-      <div class="tablette"><div class="ecran-t"><iframe title="Stand APIEx" src="/kiosk.html?espace=apiex&maquette=1&simule=2026-11-18T11:20"></iframe></div></div>
-      <figcaption><div><b>Stand d'exposant</b><span>APIEx, 2 solutions</span></div><a href="/kiosk.html?espace=apiex&maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener">Plein écran</a></figcaption>
+      <div class="tablette"><div class="ecran-t"><iframe title="2 boutons" src="/kiosk.html?espace=apiex&maquette=1&simule=2026-11-18T11:20" loading="lazy"></iframe></div></div>
+      <figcaption><div><b>2 boutons</b><span>Deux solutions sur la même tablette</span></div><a href="/kiosk.html?espace=apiex&maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener">Plein écran</a></figcaption>
     </figure>
     <figure>
-      <div class="tablette"><div class="ecran-t"><iframe title="Stand ANIP" src="/kiosk.html?espace=anip&maquette=1&simule=2026-11-18T11:20"></iframe></div></div>
-      <figcaption><div><b>Stand d'exposant</b><span>ANIP, 1 solution</span></div><a href="/kiosk.html?espace=anip&maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener">Plein écran</a></figcaption>
+      <div class="tablette"><div class="ecran-t"><iframe title="4 boutons" src="/kiosk.html?espace=service-public&maquette=1&simule=2026-11-18T11:20" loading="lazy"></iframe></div></div>
+      <figcaption><div><b>4 boutons</b><span>Le maximum par écran</span></div><a href="/kiosk.html?espace=service-public&maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener">Plein écran</a></figcaption>
     </figure>
     <figure>
-      <div class="telephone"><div class="ecran-p"><iframe title="Application visiteur" src="/v/?maquette=1&simule=2026-11-18T11:20"></iframe></div></div>
-      <figcaption><div><b>Sur le téléphone</b> <span>Le public, sur son téléphone</span></div><a href="/v/?maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener">Ouvrir</a></figcaption>
+      <div class="tablette"><div class="ecran-t"><iframe title="Veille" src="/kiosk.html?espace=apiex&maquette=1&simule=2026-11-18T11:20&veille=1" loading="lazy"></iframe></div></div>
+      <figcaption><div><b>Veille</b><span>Entre deux visiteurs</span></div><a href="/kiosk.html?espace=apiex&maquette=1&simule=2026-11-18T11:20&veille=1" target="_blank" rel="noopener">Plein écran</a></figcaption>
+    </figure>
+  </div>
+  <p class="illustration">Contenus d'illustration, tirés des sites publics des institutions. Ils seront remplacés par votre liste des espaces et de leurs solutions.</p>
+
+  <div class="rubrique"><h2>En plus, sans surcoût</h2><p>Deux compléments prêts à l'emploi, à activer si vous le souhaitez : une tablette d'accueil à l'entrée du Village, et le Village sur le téléphone des visiteurs, sans rien installer, via un QR code.</p></div>
+  <div class="bornes plus">
+    <figure>
+      <div class="tablette"><div class="ecran-t"><iframe title="Tablette d'accueil" src="/kiosk.html?espace=accueil&maquette=1&simule=2026-11-18T11:20" loading="lazy"></iframe></div></div>
+      <figcaption><div><b>Tablette d'accueil</b><span>Annuaire, prochaine session, QR</span></div><a href="/kiosk.html?espace=accueil&maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener">Plein écran</a></figcaption>
+    </figure>
+    <figure>
+      <div class="telephone"><div class="ecran-p"><iframe title="Le Village sur le téléphone" src="/v/?maquette=1&simule=2026-11-18T11:20" loading="lazy"></iframe></div></div>
+      <figcaption><div><b>Sur le téléphone</b><span>Espaces, programme, plan, favoris</span></div><a href="/v/?maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener">Ouvrir</a></figcaption>
     </figure>
   </div>
 
   <section class="suite">
-    <h2>Les maquettes</h2>
-    <ol class="attendus maquettes">
-      <li><a href="/kiosk.html?espace=accueil&maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener"><b>Tablette d'accueil</b><span>À l'entrée du Village : annuaire des exposants, prochaine session, QR de l'application.</span></a></li>
-      <li><a href="/kiosk.html?espace=apiex&maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener"><b>Borne de stand</b><span>Présentation de l'exposant, solutions à essayer, fiche à emporter.</span></a></li>
-      <li><a href="/kiosk.html?espace=apiex&maquette=1&simule=2026-11-18T11:20&veille=1" target="_blank" rel="noopener"><b>Écran de veille</b><span>Ce que montre la borne entre deux visiteurs.</span></a></li>
-      <li><a href="/v/?maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener"><b>Application du public</b><span>Sur le téléphone du visiteur, sans rien installer : exposants, programme, plan, mes stands.</span></a></li>
-      <li><a href="/admin" target="_blank" rel="noopener"><b>Espace de gestion</b><span>Pour l'équipe du MTDI : exposants, programme, publication, suivi des tablettes en direct. Accès réservé.</span></a></li>
-    </ol>
-  </section>
-
-  <section class="suite">
-    <h2>Comment fonctionne une borne</h2>
+    <h2>Comment fonctionne une tablette</h2>
     <dl>
-      <div><dt>Présentation et essai</dt><dd>Chaque stand présente son exposant ; « Essayer » ouvre la solution en plein écran, site ou application installée.</dd></div>
-      <div><dt>Toujours un chemin de retour</dt><dd>Le navigateur kiosque garde un bouton Accueil visible et ramène à la borne après une minute sans toucher.</dd></div>
-      <div><dt>Remise à zéro</dt><dd>À chaque retour, le navigateur kiosque efface saisies, connexions et cookies du visiteur précédent.</dd></div>
-      <div><dt>Contenus modifiables par l'équipe</dt><dd>Un espace de gestion permet de modifier stands, services et logos, avec aperçu en direct. La publication arrive sur toutes les tablettes en une minute, sans les toucher.</dd></div>
-      <div><dt>Suivi en direct</dt><dd>L'équipe voit chaque tablette : en ligne ou non, batterie, visiteurs, services les plus ouverts. Export pour le bilan.</dd></div>
-      <div><dt>Le Village dans la poche</dt><dd>Sans rien installer : exposants, recherche, programme du jour, plan et « mes stands » sur le téléphone du visiteur.</dd></div>
-      <div><dt>Tient sans réseau</dt><dd>Si le Wi-Fi du salon tombe, la borne reste affichée et utilisable pour ce qui est déjà chargé.</dd></div>
-      <div><dt>Verrouillage de la tablette</dt><dd>Un navigateur kiosque sur chaque tablette : seuls la borne et les services du stand sont accessibles.</dd></div>
+      <div><dt>Un toucher, la solution</dt><dd>Chaque bouton ouvre directement sa solution en plein écran : page web, ou application installée sur les tablettes Android.</dd></div>
+      <div><dt>Toujours un chemin de retour</dt><dd>Un bouton Accueil reste visible, et la tablette revient seule à l'accueil après une minute sans toucher.</dd></div>
+      <div><dt>Remise à zéro des pages web</dt><dd>À chaque retour, le navigateur kiosque efface saisies, connexions et cookies du visiteur précédent.</dd></div>
+      <div><dt>Applications installées</dt><dd>La tablette ne peut pas les remettre à zéro : leurs porteurs prévoient un mode démonstration ou une déconnexion automatique.</dd></div>
+      <div><dt>iPad et Android</dt><dd>Sans réinitialiser les appareils prêtés. Sur iPad, verrouillé par l'Accès guidé, la tablette n'ouvre que des solutions web.</dd></div>
+      <div><dt>Contenus modifiables par votre équipe</dt><dd>Un espace de gestion pour changer espaces, boutons et logos, avec aperçu. La publication arrive sur toutes les tablettes en une minute.</dd></div>
+      <div><dt>Suivi en direct</dt><dd>Chaque tablette, en ligne ou non, sa batterie, ses visiteurs et les solutions les plus ouvertes. Export pour le bilan.</dd></div>
+      <div><dt>Tient sans réseau</dt><dd>Si le Wi-Fi du salon tombe, l'écran d'accueil reste affiché et utilisable pour ce qui est déjà chargé.</dd></div>
     </dl>
   </section>
 
   <section class="suite">
-    <h2>Pour passer en production</h2>
+    <h2>Calendrier</h2>
     <ul class="attendus">
-      <li><span>Charte graphique et logos du Village</span><em class="recu">Reçus</em></li>
-      <li><span>Liste des espaces, des services et des applications à installer</span><em>À recevoir</em></li>
-      <li><span>Inventaire des tablettes : nombre, modèles iPad ou Android, espace d'affectation</span><em>À recevoir</em></li>
-      <li><span>Fichiers de la police d'accroche de la charte</span><em>À recevoir</em></li>
+      <li><span>Charte graphique et éléments visuels du Village</span><em class="recu">Reçus</em></li>
+      <li><span>Liste des espaces et de leurs solutions, en précisant pour chacune : application web ou application à installer</span><em>6 novembre</em></li>
+      <li><span>Inventaire des tablettes : nombre, modèles et versions de système, espace d'affectation</span><em>6 novembre</em></li>
+      <li><span>Mode démonstration ou déconnexion automatique des applications installées, par leurs porteurs</span><em>Avant le 16 novembre</em></li>
+      <li><span>Installation et réglage des tablettes sur site</span><em>16 et 17 novembre</em></li>
+      <li><span>Assistance technique pendant l'événement</span><em>18 au 20 novembre</em></li>
     </ul>
+  </section>
+
+  <section class="suite">
+    <h2>Les écrans</h2>
+    <ol class="attendus maquettes">
+      <li><a href="/kiosk.html?espace=service-public&maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener"><b>Écran d'accueil d'un espace</b><span>Gabarits 1, 2 et 4 boutons, en plein écran.</span></a></li>
+      <li><a href="/kiosk.html?espace=apiex&maquette=1&simule=2026-11-18T11:20&veille=1" target="_blank" rel="noopener"><b>Écran de veille</b><span>Ce que montre la tablette entre deux visiteurs.</span></a></li>
+      <li><a href="/kiosk.html?espace=accueil&maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener"><b>Tablette d'accueil</b><span>En complément : annuaire, prochaine session, QR du Village.</span></a></li>
+      <li><a href="/v/?maquette=1&simule=2026-11-18T11:20" target="_blank" rel="noopener"><b>Le Village sur le téléphone</b><span>En complément : espaces, programme, plan, favoris.</span></a></li>
+      <li><a href="/admin" target="_blank" rel="noopener"><b>Espace de gestion</b><span>Pour votre équipe : espaces, boutons, publication, suivi des tablettes. Accès réservé.</span></a></li>
+    </ol>
   </section>
 
   <footer><span>Benin Digital &amp; Innovation Week 2026, Le Village de l'Innovation</span><span>Maquettes proposées par Synelia</span></footer>

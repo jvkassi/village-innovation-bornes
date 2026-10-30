@@ -230,3 +230,7 @@ dialog form{display:flex;justify-content:flex-end;margin-top:18px}
 .prog-table td{padding:6px 8px;border-bottom:1px solid var(--trait)}
 .prog-table input,.prog-table select{width:100%}
 .prog-table td.h{width:110px}.prog-table td.j{width:190px}.prog-table td.x{width:44px}
+
+.etiquette{display:block;font-size:13px;font-weight:500;margin-bottom:6px}
+.alerte{background:rgba(255,170,0,.12);border:1px solid rgba(255,170,0,.5);color:#ffcf70;border-radius:10px;padding:10px 12px;font-size:13.5px;line-height:1.45}
+.aide.large,.alerte.large{grid-column:1/-1}

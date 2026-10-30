@@ -89,7 +89,8 @@
       "logo": "",
       "consigne": "",
       "actif": true,
-      "solutions": []
+      "solutions": [],
+      "plateforme": ""
     },
     {
       "id": "service-public",
@@ -124,6 +125,24 @@
           "icone": "passport",
           "logo": "",
           "apercu": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-evisa.jpg"
+        },
+        {
+          "id": "facture-electricite",
+          "nom": "Facture d'électricité",
+          "description": "Payer sa facture SBEE ou recharger son compteur.",
+          "type": "web",
+          "url": "https://sbee.service-public.bj/",
+          "icone": "sun",
+          "logo": ""
+        },
+        {
+          "id": "facture-eau",
+          "nom": "Facture d'eau",
+          "description": "Payer sa facture SONEB en ligne.",
+          "type": "web",
+          "url": "https://soneb.service-public.bj/",
+          "icone": "receipt",
+          "logo": ""
         }
       ],
       "nomComplet": "Portail national des services publics du Bénin (service-public.bj) et plateforme e-Visa",
@@ -140,7 +159,8 @@
           "source": "https://service-public.bj/public/services/service/PS00005"
         }
       ],
-      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-service-public.jpg"
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-service-public.jpg",
+      "plateforme": ""
     },
     {
       "id": "anip",
@@ -181,7 +201,8 @@
           "source": "https://anip.bj/cgu"
         }
       ],
-      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-anip.jpg"
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-anip.jpg",
+      "plateforme": ""
     },
     {
       "id": "apiex",
@@ -231,7 +252,8 @@
           "source": "https://sgg.gouv.bj/doc/decret-2025-527/download"
         }
       ],
-      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-monentreprise.jpg"
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-monentreprise.jpg",
+      "plateforme": ""
     },
     {
       "id": "dgi",
@@ -272,7 +294,8 @@
           "source": "https://api.impots.bj/media/69d0157dcf3f3_PROJET%20RAPPORT%20D'ACTIVIT%C3%89S%20DGI-2025.pdf"
         }
       ],
-      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-impots.jpg"
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-impots.jpg",
+      "plateforme": ""
     },
     {
       "id": "dgtcp",
@@ -313,7 +336,8 @@
           "source": "http://tresorbenin.bj/page/missions_attributions"
         }
       ],
-      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-tresor.jpg"
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-tresor.jpg",
+      "plateforme": ""
     },
     {
       "id": "educmaster",
@@ -349,7 +373,8 @@
         "Statistiques et cartographie par département"
       ],
       "reperes": [],
-      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-educmaster.jpg"
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-educmaster.jpg",
+      "plateforme": ""
     },
     {
       "id": "sante",
@@ -389,7 +414,8 @@
           "source": "https://sgg.gouv.bj/doc/decret-2021-571/download"
         }
       ],
-      "image": ""
+      "image": "",
+      "plateforme": ""
     },
     {
       "id": "sbee",
@@ -434,7 +460,8 @@
           "source": "https://sgg.gouv.bj/doc/decret-2025-689/download"
         }
       ],
-      "image": ""
+      "image": "",
+      "plateforme": ""
     },
     {
       "id": "soneb",
@@ -479,7 +506,8 @@
           "source": "https://web.soneb.bj/pg-genese-mission"
         }
       ],
-      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-soneb.jpg"
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-soneb.jpg",
+      "plateforme": ""
     },
     {
       "id": "semecity",
@@ -519,7 +547,8 @@
           "source": "https://sgg.gouv.bj/doc/decret-2017-440/download"
         }
       ],
-      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-semecity.jpg"
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-semecity.jpg",
+      "plateforme": ""
     },
     {
       "id": "celtiis",
@@ -564,7 +593,8 @@
           "source": "https://www.agenceecofin.com/operateur/1311-113584-benin-celtiis-a-enregistre-1-5-million-d-abonnes-en-un-an-d-activite"
         }
       ],
-      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-celtiis.jpg"
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-celtiis.jpg",
+      "plateforme": ""
     }
   ]
 }

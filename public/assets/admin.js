@@ -141,7 +141,7 @@
     sel = +b.dataset.i; rendreListe(); rendreEdition();
   });
   $("#btn-ajout-stand").addEventListener("click", () => {
-    if (brouillon.espaces.length >= 40) return toast("40 stands au maximum.");
+    if (brouillon.espaces.length >= 40) return toast("40 espaces au maximum.");
     const nums = brouillon.espaces.map((x) => parseInt(x.numero, 10)).filter((n) => n > 0);
     brouillon.espaces.push({ id: "stand-" + Math.random().toString(36).slice(2, 7), type: "exposant", numero: String((nums.length ? Math.max(...nums) : 0) + 1),
       nom: "Nouvel exposant", thematique: "", accroche: "", presentation: "", site: "", email: "", telephone: "", logo: "", consigne: "", actif: true,
@@ -154,7 +154,7 @@
   /* ---------- Édition d'un stand ---------- */
   function rendreEdition() {
     const e = brouillon.espaces[sel];
-    if (!e) { $("#edition").innerHTML = '<p class="vide">Ajoutez un premier stand.</p>'; return apercu(); }
+    if (!e) { $("#edition").innerHTML = '<p class="vide">Ajoutez un premier espace.</p>'; return apercu(); }
     const n = e.solutions.length;
     $("#edition").innerHTML = `
       <div class="edition-tete">
@@ -163,12 +163,12 @@
           <button class="btn" data-action="installer">Installer sur une tablette</button>
           <button class="btn icone" data-action="monter" title="Monter dans la liste" ${sel === 0 ? "disabled" : ""}>${I.haut}</button>
           <button class="btn icone" data-action="descendre" title="Descendre dans la liste" ${sel === brouillon.espaces.length - 1 ? "disabled" : ""}>${I.bas}</button>
-          <button class="btn icone danger" data-action="supprimer" title="Supprimer le stand">${I.suppr}</button>
+          <button class="btn icone danger" data-action="supprimer" title="Supprimer l'espace">${I.suppr}</button>
         </div>
       </div>
       <div class="bloc">
         <div class="segment" role="radiogroup" aria-label="Type de tablette" style="margin-bottom:14px">
-          <button role="radio" aria-checked="${e.type !== "accueil"}" data-typestand="exposant">Stand d'exposant</button>
+          <button role="radio" aria-checked="${e.type !== "accueil"}" data-typestand="exposant">Espace d'exposant</button>
           <button role="radio" aria-checked="${e.type === "accueil"}" data-typestand="accueil">Tablette d'accueil</button>
         </div>
         ${e.type === "accueil" ? `
@@ -185,6 +185,14 @@
             <label>N° de stand<input data-k="numero" value="${esc(e.numero)}" maxlength="8" placeholder="12"></label>
             <label>Thématique<input data-k="thematique" value="${esc(e.thematique)}" maxlength="40" list="thematiques" placeholder="Services publics"></label>
           </div>
+          <div class="large"><span class="etiquette">Tablette de cet espace</span>
+            <div class="segment" role="radiogroup" aria-label="Tablette de cet espace">
+              <button role="radio" aria-checked="${e.plateforme === "android"}" data-plateforme="android">Android</button>
+              <button role="radio" aria-checked="${e.plateforme === "ipad"}" data-plateforme="ipad">iPad</button>
+              <button role="radio" aria-checked="${!e.plateforme}" data-plateforme="">À préciser</button>
+            </div>
+            <small class="aide">${e.plateforme === "ipad" ? "Sur iPad, la borne n'ouvre que des applications web. Une application à installer doit aller sur une tablette Android, passer par sa version web, ou avoir son propre iPad sans borne." : e.plateforme === "android" ? "Sur Android, la borne ouvre les sites et les applications installées." : "Le modèle de tablette sera connu avec l'inventaire du 6 novembre."}</small>
+          </div>
           <label class="large">Accroche <small>une ligne, affichée en grand</small><input data-k="accroche" value="${esc(e.accroche)}" maxlength="90" placeholder="Ce que l'exposant apporte, en une phrase."></label>
           <label class="large">Nom complet <small>dans l'application visiteur</small><input data-k="nomComplet" value="${esc(e.nomComplet || "")}" maxlength="140" placeholder="Agence nationale d'…"></label>
           <label class="large">Présentation <small>3 phrases au plus</small><textarea data-k="presentation" maxlength="700" rows="3">${esc(e.presentation)}</textarea></label>
@@ -199,7 +207,7 @@
           <label>Image ou capture <small>affichée sur la fiche téléphone</small>
             <span class="url-ligne">${e.image ? `<img class="logo-mini" src="${esc(e.image)}" alt="">` : ""}<button class="btn" data-action="image-stand">${e.image ? "Changer" : "Envoyer une image"}</button>${e.image ? '<button class="btn" data-action="image-stand-retirer">Retirer</button>' : ""}</span>
             <input type="file" accept="image/png,image/jpeg,image/webp" hidden data-fichier-stand="image"></label>
-          <label class="interrupteur large"><input type="checkbox" data-k="actif" ${e.actif !== false ? "checked" : ""}> Afficher ce stand sur les bornes et dans l'application</label>
+          <label class="interrupteur large"><input type="checkbox" data-k="actif" ${e.actif !== false ? "checked" : ""}> Afficher cet espace sur les bornes et dans l'application</label>
         </div>`}
       </div>
       ${e.type === "accueil" ? "" : `
@@ -241,6 +249,7 @@
             <span class="url-ligne"><input type="url" data-ks="url" value="${esc(s.url)}" placeholder="https://"><button class="btn" data-action="verifier">Vérifier</button><button class="btn" data-action="tester">Ouvrir</button></span>
             <span class="verif" data-verif></span>
           </label>` : `
+          ${brouillon.espaces[sel]?.plateforme === "ipad" ? `<p class="alerte large">Cet espace est sur iPad : une application installée ne pourra pas être ouverte depuis la borne. Publication bloquée tant que ce n'est pas réglé.</p>` : `<p class="aide large">Pour une application installée, prévoyez avec son porteur un mode démonstration sans connexion personnelle, ou une déconnexion automatique : la borne ne peut pas remettre l'application à zéro entre deux visiteurs.</p>`}
           <label>Paquet Android<input data-ks="android" value="${esc(s.android)}" placeholder="com.exemple.app"><small>Visible dans le lien Play Store : id=…</small></label>
           <label>Lien d'ouverture iOS<input data-ks="ios" value="${esc(s.ios)}" placeholder="exemple://"><small>Fourni par le porteur de l'application.</small></label>
           <label class="large">Page de l'application (pour le QR code)<input type="url" data-ks="url" value="${esc(s.url)}" placeholder="https://"></label>`}
@@ -290,6 +299,8 @@
     const sEl = ev.target.closest("[data-s]"); const j = sEl ? +sEl.dataset.s : -1;
     const ts = ev.target.closest("[data-typestand]");
     if (ts) { e.type = ts.dataset.typestand; modifie(); return rendreEdition(); }
+    const pf = ev.target.closest("[data-plateforme]");
+    if (pf) { e.plateforme = pf.dataset.plateforme; modifie(); return rendreEdition(); }
     const typ = ev.target.closest("[data-type]");
     if (typ) { e.solutions[j].type = typ.dataset.type; modifie(); return rendreEdition(); }
     const pic = ev.target.closest("[data-picto]");
@@ -301,7 +312,7 @@
       case "monter": echanger(brouillon.espaces, sel, sel - 1); sel--; break;
       case "descendre": echanger(brouillon.espaces, sel, sel + 1); sel++; break;
       case "supprimer":
-        if (!confirm(`Supprimer le stand « ${e.nom} » ? Les tablettes affectées afficheront l'écran d'installation après publication.`)) return;
+        if (!confirm(`Supprimer l'espace « ${e.nom} » ? Les tablettes affectées afficheront l'écran d'installation après publication.`)) return;
         brouillon.espaces.splice(sel, 1); sel = Math.max(0, sel - 1); break;
       case "installer": return installer(e);
       case "ajout-solution": S.push({ id: "s" + Math.random().toString(36).slice(2, 7), nom: "", porteur: "", description: "", type: "web", url: "https://", icone: "globe", logo: "" }); break;

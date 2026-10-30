@@ -148,8 +148,12 @@
 
   // Retire les dernières activités tant que l'écran déborde : la borne ne défile jamais.
   function ajuster() {
-    const ec = $("ecran-exposant"), ul = $("ex-activites");
-    while (ul.children.length && ec.scrollHeight > ec.clientHeight + 1) ul.lastElementChild.remove();
+    const ec = $("ecran-exposant"), ul = $("ex-activites"), pres = $("ex-presentation");
+    const deborde = () => ec.scrollHeight > ec.clientHeight + 1;
+    ec.classList.remove("serre"); pres.classList.remove("masque");
+    while (ul.children.length && deborde()) ul.lastElementChild.remove();
+    if (deborde()) pres.classList.add("masque");
+    if (deborde()) ec.classList.add("serre");
   }
   addEventListener("resize", () => { if (espace && espace.type !== "accueil") { $("ex-activites").innerHTML = puces(espace.activites, 4); ajuster(); } });
 

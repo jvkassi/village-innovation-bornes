@@ -211,3 +211,9 @@ ol,ul{list-style:none}
 .feuille .activites{grid-template-columns:1fr;margin-top:calc(var(--u)*3)}
 .feuille .boite{max-height:100%;overflow:auto}
 .feuille .boite:has(#f-activites:not(:empty)) #f-texte{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+
+/* Écran chargé (4 boutons) : la poche se fait discrète */
+.serre .poche{padding:calc(var(--u)*2)}
+.serre .poche .qr{width:calc(var(--u)*12)}
+.serre .poche span{display:none}
+.serre .identite{margin-top:calc(var(--u)*2.5)}
