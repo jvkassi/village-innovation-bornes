@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Espace exposant — Le Village de l'Innovation</title>
+<link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/Bricolage-Grotesque.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/admin.css">
+<link rel="stylesheet" href="/assets/exposant.css">
+</head>
+<body>
+
+<!-- Connexion -->
+<section class="connexion" id="connexion" hidden>
+  <form id="form-connexion">
+    <div class="logo logo-side" role="img" aria-label="Le Village de l'Innovation"></div>
+    <h1>Espace exposant</h1>
+    <p>Présentez votre stand sur les tablettes du Village et dans l'application des visiteurs.</p>
+    <label>E-mail<input type="email" id="c-email" autocomplete="username" required></label>
+    <label>Mot de passe<input type="password" id="c-mdp" autocomplete="current-password" required></label>
+    <button class="btn principal" type="submit">Se connecter</button>
+    <p class="erreur" id="err-connexion" role="alert"></p>
+    <p class="petit">Pas encore d'accès ? L'équipe du Village vous le transmet à la confirmation de votre stand.</p>
+  </form>
+</section>
+
+<!-- Premier mot de passe -->
+<section class="connexion" id="nouveau-mdp" hidden>
+  <form id="form-mdp">
+    <div class="logo logo-side" role="img" aria-label="Le Village de l'Innovation"></div>
+    <h1>Votre mot de passe</h1>
+    <p>Remplacez le mot de passe provisoire reçu de l'équipe du Village.</p>
+    <label>Mot de passe provisoire<input type="password" id="m-actuel" autocomplete="current-password" required></label>
+    <label>Nouveau mot de passe <small>10 caractères au moins</small><input type="password" id="m-nouveau" autocomplete="new-password" minlength="10" required></label>
+    <label>Confirmez<input type="password" id="m-confirme" autocomplete="new-password" minlength="10" required></label>
+    <button class="btn principal" type="submit">Enregistrer</button>
+    <p class="erreur" id="err-mdp" role="alert"></p>
+  </form>
+</section>
+
+<!-- Application -->
+<div class="app" id="app" hidden>
+  <header class="tete">
+    <div class="marque"><div class="logo logo-icon" aria-hidden="true"></div><b>Espace exposant</b></div>
+    <span class="qui" id="qui"></span>
+    <div class="actions-tete">
+      <a class="btn" id="voir-fiche" href="/v/" target="_blank" rel="noopener">Voir ma fiche publique</a>
+      <button class="btn principal" id="btn-envoyer" disabled>Envoyer pour validation</button>
+      <button class="btn discret" id="btn-sortir">Sortir</button>
+    </div>
+  </header>
+
+  <main class="ex-grille">
+    <section class="edition">
+      <div class="edition-tete"><div><p class="sur-titre" id="ex-stand"></p><h1 id="ex-nom"></h1></div></div>
+      <div class="statut" id="statut"></div>
+      <div id="formulaire"></div>
+    </section>
+    <aside class="apercu">
+      <div class="apercu-tete">
+        <h2>Aperçu</h2>
+        <div class="segment" role="radiogroup" aria-label="Écran prévisualisé">
+          <button role="radio" aria-checked="true" data-ecran="">Tablette</button>
+          <button role="radio" aria-checked="false" data-ecran="veille">Veille</button>
+        </div>
+      </div>
+      <div class="tablette"><div class="ecran-t"><iframe id="apercu" title="Aperçu de votre tablette"></iframe></div></div>
+      <p class="note">Votre tablette telle que les visiteurs la verront, avec vos modifications. Elles sont publiées après validation par l'équipe du Village.</p>
+    </aside>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+<script src="/assets/exposant.js"></script>
+</body>
+</html>

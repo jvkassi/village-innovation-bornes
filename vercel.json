@@ -18,6 +18,10 @@
     {
       "source": "/maquettes",
       "destination": "/maquettes.html"
+    },
+    {
+      "source": "/exposant",
+      "destination": "/exposant.html"
     }
   ],
   "headers": [
@@ -76,6 +80,23 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/exposant(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
         }
       ]
     }

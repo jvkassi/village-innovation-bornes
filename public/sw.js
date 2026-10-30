@@ -1,6 +1,6 @@
 /* Hors-ligne : l'interface du kiosque reste affichée si le Wi-Fi du salon tombe.
    La configuration est servie réseau d'abord (modifications visibles dès qu'il y a du réseau). */
-const V = "kiosque-v7";
+const V = "kiosque-v8";
 const COQUE = ["/kiosk.html", "/assets/kiosk.css", "/assets/kiosk.js", "/config/espaces.json",
   "/brand/lockup-side.svg", "/brand/icon.svg", "/brand/favicon.svg",
   "/fonts/Bricolage-Grotesque.woff2", "/fonts/Orbitron.woff2", "/vendor/qrcode.js"];

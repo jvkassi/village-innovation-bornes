@@ -22,14 +22,32 @@
     {
       "jour": "2026-11-18",
       "heure": "11:00",
-      "titre": "Visite guidée des services publics numériques",
+      "titre": "Visite guidée : l'État en ligne, du NPI au e-Visa",
       "lieu": "Départ de l'accueil"
     },
     {
       "jour": "2026-11-18",
+      "heure": "12:30",
+      "titre": "Démo : payer sa facture SBEE en moins d'une minute",
+      "lieu": "Stand Services publics en ligne"
+    },
+    {
+      "jour": "2026-11-18",
       "heure": "14:30",
-      "titre": "Atelier : créer son entreprise en ligne",
+      "titre": "Atelier : créer son entreprise en ligne sur monentreprise.bj",
       "lieu": "Stand APIEx"
+    },
+    {
+      "jour": "2026-11-18",
+      "heure": "16:00",
+      "titre": "Essai de motos électriques sur le parvis",
+      "lieu": "Stand M Auto"
+    },
+    {
+      "jour": "2026-11-18",
+      "heure": "17:30",
+      "titre": "Pitch : 6 startups béninoises en 3 minutes chacune",
+      "lieu": "Accueil du Village"
     },
     {
       "jour": "2026-11-18",
@@ -45,9 +63,33 @@
     },
     {
       "jour": "2026-11-19",
-      "heure": "11:30",
-      "titre": "Atelier : ses démarches administratives en ligne",
-      "lieu": "Stand Services publics en ligne"
+      "heure": "11:00",
+      "titre": "Atelier : encaisser par mobile money sans site internet",
+      "lieu": "Stand KkiaPay"
+    },
+    {
+      "jour": "2026-11-19",
+      "heure": "12:00",
+      "titre": "Démo : retrouver son NPI et vérifier un document",
+      "lieu": "Stand ANIP"
+    },
+    {
+      "jour": "2026-11-19",
+      "heure": "14:00",
+      "titre": "Table ronde : le dossier médical qui suit le patient",
+      "lieu": "Stand Kea Medicals"
+    },
+    {
+      "jour": "2026-11-19",
+      "heure": "15:30",
+      "titre": "Atelier : sa facture normalisée e-MECeF en direct",
+      "lieu": "Stand DGI"
+    },
+    {
+      "jour": "2026-11-19",
+      "heure": "17:00",
+      "titre": "Rencontre étudiants et recruteurs du numérique",
+      "lieu": "Stand Sèmè City"
     },
     {
       "jour": "2026-11-19",
@@ -63,8 +105,26 @@
     },
     {
       "jour": "2026-11-20",
+      "heure": "11:00",
+      "titre": "Atelier : un lien de paiement en deux minutes",
+      "lieu": "Stand FedaPay"
+    },
+    {
+      "jour": "2026-11-20",
+      "heure": "12:30",
+      "titre": "Démo : la ville dans une seule application",
+      "lieu": "Stand Gozem"
+    },
+    {
+      "jour": "2026-11-20",
+      "heure": "14:00",
+      "titre": "Défi : trouver un plombier en moins de 5 minutes",
+      "lieu": "Stand Ylomi"
+    },
+    {
+      "jour": "2026-11-20",
       "heure": "16:00",
-      "titre": "Temps fort de clôture",
+      "titre": "Temps fort de clôture et remise des prix du Village",
       "lieu": "Accueil du Village"
     },
     {
@@ -594,6 +654,236 @@
         }
       ],
       "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-celtiis.jpg",
+      "plateforme": ""
+    },
+    {
+      "id": "fedapay",
+      "numero": "12",
+      "nom": "FedaPay",
+      "nomComplet": "FedaPay, plateforme de paiement en ligne",
+      "thematique": "Startups",
+      "accroche": "Encaisser par mobile money et carte, en Afrique et partout dans le monde.",
+      "presentation": "FedaPay fournit aux entrepreneurs, institutions, particuliers et ONG des outils pour encaisser des paiements par mobile money et carte bancaire, dans toute la zone UEMOA et au-delà. Lien de paiement, page de paiement ou intégration dans un site ou une application, et reversements vers des comptes mobile money.",
+      "activites": [
+        "Liens et pages de paiement, sans développement",
+        "Intégration dans les sites et applications",
+        "Reversements vers des comptes mobile money",
+        "Portails de paiement pour les e-services publics",
+        "Collecte de dons pour les ONG et associations"
+      ],
+      "reperes": [
+        {
+          "texte": "Utilisé pour les cours en ligne, l'e-commerce, les événements, les dons et les e-services publics",
+          "source": "https://www.fedapay.com/"
+        }
+      ],
+      "site": "https://www.fedapay.com/",
+      "logo": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/logos/seed-logo-fedapay.svg",
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-fedapay.jpg",
+      "solutions": [
+        {
+          "id": "fedapay-site",
+          "nom": "FedaPay",
+          "description": "Créer un lien de paiement en deux minutes.",
+          "type": "web",
+          "url": "https://www.fedapay.com/",
+          "icone": "wallet",
+          "logo": ""
+        }
+      ],
+      "type": "exposant",
+      "email": "",
+      "telephone": "",
+      "consigne": "Touchez un service pour l'essayer.",
+      "actif": true,
+      "plateforme": ""
+    },
+    {
+      "id": "kkiapay",
+      "numero": "13",
+      "nom": "KkiaPay",
+      "nomComplet": "KkiaPay, agrégateur de paiement",
+      "thematique": "Startups",
+      "accroche": "Mobile money, carte bancaire et Wave : un seul compte pour encaisser.",
+      "presentation": "KkiaPay permet aux marchands, avec ou sans site internet, de recevoir des paiements par mobile money et carte bancaire, puis de récupérer les montants sur leur compte mobile money ou bancaire. Un tableau de bord suit les transactions et une API simple s'adresse aux développeurs.",
+      "activites": [
+        "Encaissement par mobile money et carte bancaire",
+        "Paiement sans site internet, par lien",
+        "Tableau de bord des transactions, export Excel",
+        "API et SDK pour les développeurs",
+        "Disponible au Bénin, en Côte d'Ivoire, au Togo, au Sénégal, au Niger et au Burkina Faso"
+      ],
+      "reperes": [
+        {
+          "texte": "Utilisé par le ministère des Finances pour le paiement de la taxe sur les véhicules (CIO Mag, 2019)",
+          "source": "https://cio-mag.com/au-benin-kkiapay-se-positionne-comme-le-premier-agregateur-de-paiement/"
+        }
+      ],
+      "site": "https://kkiapay.me/",
+      "logo": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/logos/seed-logo-kkiapay.svg",
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-kkiapay.jpg",
+      "solutions": [
+        {
+          "id": "kkiapay-site",
+          "nom": "KkiaPay",
+          "description": "Voir comment un client paie par mobile money.",
+          "type": "web",
+          "url": "https://kkiapay.me/",
+          "icone": "wallet",
+          "logo": ""
+        }
+      ],
+      "type": "exposant",
+      "email": "",
+      "telephone": "",
+      "consigne": "Touchez un service pour l'essayer.",
+      "actif": true,
+      "plateforme": ""
+    },
+    {
+      "id": "gozem",
+      "numero": "14",
+      "nom": "Gozem",
+      "nomComplet": "Gozem, la super app d'Afrique francophone",
+      "thematique": "Startups",
+      "accroche": "Zem, tricycle, taxi, repas et colis : toute la ville dans une seule application.",
+      "presentation": "Gozem est une super app fondée en 2018 au Togo et présente au Bénin. Elle réunit la mobilité (zem, tricycle, taxi), la livraison de repas et de courses, l'envoi de colis et des achats digitaux comme le crédit de communication ou la bouteille de gaz.",
+      "activites": [
+        "Courses en zem, tricycle et taxi",
+        "Livraison de repas et de courses",
+        "Envoi de colis par coursier",
+        "Recharge de crédit et bouteille de gaz livrée",
+        "Portefeuille mobile Gozem Money"
+      ],
+      "reperes": [
+        {
+          "texte": "Rachat de la fintech béninoise Moneex pour lancer Gozem Money (Semafor, 2023)",
+          "source": "https://www.semafor.com/article/11/08/2023/togos-gozem-buys-fintech-for-mobile-money-push"
+        }
+      ],
+      "site": "https://gozem.co/bj/fr/",
+      "logo": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/logos/seed-logo-gozem.png",
+      "image": "",
+      "solutions": [
+        {
+          "id": "gozem-site",
+          "nom": "Gozem Bénin",
+          "description": "Découvrir les services de la super app.",
+          "type": "web",
+          "url": "https://gozem.co/bj/fr/",
+          "icone": "route",
+          "logo": ""
+        }
+      ],
+      "type": "exposant",
+      "email": "",
+      "telephone": "",
+      "consigne": "Touchez un service pour l'essayer.",
+      "actif": true,
+      "plateforme": ""
+    },
+    {
+      "id": "ylomi",
+      "numero": "15",
+      "nom": "Ylomi",
+      "nomComplet": "Ylomi, services du quotidien à domicile",
+      "thematique": "Startups",
+      "accroche": "Le bon prestataire, vérifié et assuré, pour les services du quotidien.",
+      "presentation": "Ylomi met en relation des particuliers et des entreprises avec des prestataires qualifiés pour les services du quotidien, ponctuels ou récurrents. Les professionnels sont contrôlés et formés, les prestations sont assurées, et une assistance répond six jours sur sept.",
+      "activites": [
+        "Mise en relation avec des prestataires vérifiés",
+        "Services ponctuels et récurrents à domicile",
+        "Assurance dommage et risque sur les prestations",
+        "Formation des professionnels",
+        "Présent à Cotonou, Abomey-Calavi, Porto-Novo, Ouidah, Bohicon et Parakou"
+      ],
+      "reperes": [
+        {
+          "texte": "Plus de 3 000 professionnels inscrits à Cotonou, selon Ylomi",
+          "source": "https://ylomi.bj/"
+        }
+      ],
+      "site": "https://ylomi.bj/",
+      "logo": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/logos/seed-logo-ylomi.svg",
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-ylomi.jpg",
+      "solutions": [
+        {
+          "id": "ylomi-site",
+          "nom": "Ylomi",
+          "description": "Trouver un prestataire près de chez soi.",
+          "type": "web",
+          "url": "https://ylomi.bj/",
+          "icone": "building",
+          "logo": ""
+        }
+      ],
+      "type": "exposant",
+      "email": "",
+      "telephone": "",
+      "consigne": "Touchez un service pour l'essayer.",
+      "actif": true,
+      "plateforme": ""
+    },
+    {
+      "id": "mauto",
+      "numero": "16",
+      "nom": "M Auto",
+      "nomComplet": "M Auto, mobilité électrique",
+      "thematique": "Startups",
+      "accroche": "Des motos électriques pour les zems de Cotonou.",
+      "presentation": "M Auto commercialise au Bénin et au Togo des motos électriques pensées pour les taxis-motos, avec un paiement étalé et un réseau de recharge. Ses modèles Chap Chap et Commando remplacent les motos à essence sur les trajets du quotidien.",
+      "activites": [
+        "Motos électriques Chap Chap et Commando",
+        "Paiement étalé pour les conducteurs de zem",
+        "Stations de recharge",
+        "Conversion des motos thermiques à l'électrique"
+      ],
+      "reperes": [
+        {
+          "texte": "Commando : jusqu'à 70 km d'autonomie et 80 km/h (Afrik 21)",
+          "source": "https://afrik21.africa/en/benin-togo-m-auto-puts-its-electric-motorbikes-chap-chap-and-commando-on-sale"
+        }
+      ],
+      "site": "",
+      "logo": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/logos/seed-logo-mauto.png",
+      "image": "",
+      "solutions": [],
+      "type": "exposant",
+      "email": "",
+      "telephone": "",
+      "consigne": "Touchez un service pour l'essayer.",
+      "actif": true,
+      "plateforme": ""
+    },
+    {
+      "id": "kea-medicals",
+      "numero": "17",
+      "nom": "Kea Medicals",
+      "nomComplet": "Kea Medicals, identité médicale universelle",
+      "thematique": "Startups",
+      "accroche": "Le dossier du patient suit le patient, d'un centre de santé à l'autre.",
+      "presentation": "Kea Medicals, fondée par la médecin béninoise Vèna Arielle Ahouansou, relie hôpitaux, pharmacies, laboratoires et assurances sur une plateforme centralisée. Le médecin accède en un clic à l'historique de son patient, quel que soit le centre où il a été soigné.",
+      "activites": [
+        "Identité médicale unique du patient",
+        "Historique médical accessible en un clic",
+        "Interconnexion hôpitaux, pharmacies et laboratoires",
+        "Échanges avec les assurances"
+      ],
+      "reperes": [
+        {
+          "texte": "Lancée en 2017 par Vèna Arielle Ahouansou (We Are Tech Africa)",
+          "source": "https://www.wearetech.africa/fr/fils/tech-stars/la-beninoise-vena-arielle-ahouansou-interconnecte-les-structures-de-sante-a-travers-une-base-de-donnees-unique"
+        }
+      ],
+      "site": "",
+      "logo": "",
+      "image": "",
+      "solutions": [],
+      "type": "exposant",
+      "email": "",
+      "telephone": "",
+      "consigne": "Touchez un service pour l'essayer.",
+      "actif": true,
       "plateforme": ""
     }
   ]

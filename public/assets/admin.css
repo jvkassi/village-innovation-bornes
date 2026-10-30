@@ -232,5 +232,43 @@ dialog form{display:flex;justify-content:flex-end;margin-top:18px}
 .prog-table td.h{width:110px}.prog-table td.j{width:190px}.prog-table td.x{width:44px}
 
 .etiquette{display:block;font-size:13px;font-weight:500;margin-bottom:6px}
-.alerte{background:rgba(255,170,0,.12);border:1px solid rgba(255,170,0,.5);color:#ffcf70;border-radius:10px;padding:10px 12px;font-size:13.5px;line-height:1.45}
-.aide.large,.alerte.large{grid-column:1/-1}
+.avertissement{background:#fff5e6;border:1px solid #f0c27a;color:var(--alerte);border-radius:10px;padding:10px 12px;font-size:13.5px;line-height:1.45}
+.aide.large,.avertissement.large{grid-column:1/-1}
+
+/* Accès exposant */
+.acces-bloc h3 small{font-weight:400;color:var(--doux);margin-left:6px}
+.acces-bloc .avertissement{margin-bottom:12px}
+.comptes{list-style:none;margin-bottom:12px;border-top:1px solid var(--trait)}
+.comptes li{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--trait)}
+.comptes li > span{flex:1;min-width:0}
+.comptes b{display:block;font-weight:600;overflow:hidden;text-overflow:ellipsis}
+.comptes small{color:var(--doux);font-size:12px}
+.acces-bloc .url-ligne input{flex:1}
+.lien{border:0;background:none;color:var(--electrique);font:inherit;font-weight:600;cursor:pointer;padding:0;text-decoration:underline}
+pre.acces{white-space:pre-wrap;background:#f6f8fc;border:1px solid var(--trait);border-radius:var(--r);padding:14px;font:13.5px/1.55 var(--f);color:var(--encre);margin-top:12px}
+
+/* Demandes des exposants */
+.demandes{padding:28px;max-width:1100px;width:100%;margin:0 auto}
+.demande{background:var(--surface);border:1px solid var(--trait);border-radius:var(--r);margin-bottom:14px;overflow:hidden}
+.demande header{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 16px}
+.demande header b{font-size:16px}
+.demande header small{display:block;color:var(--doux);font-size:12.5px;margin-top:2px}
+.demande .outils{display:flex;gap:8px;flex:none}
+.tag{display:inline-block;font-size:11.5px;font-weight:600;color:var(--bleu);background:#e7edfb;border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:2px}
+.diff{width:100%;border-collapse:collapse;border-top:1px solid var(--trait);font-size:13.5px}
+.diff th,.diff td{text-align:left;vertical-align:top;padding:10px 16px;border-bottom:1px solid var(--trait)}
+.diff thead th{font-size:12px;font-weight:500;color:var(--doux);background:#f8f9fc}
+.diff tbody th{width:150px;font-weight:600;color:var(--encre)}
+.diff td{width:42%;color:var(--doux)}
+.diff td.nouveau{color:var(--encre);background:#f2fbf6}
+.diff ul{padding-left:16px}
+.diff i{color:var(--doux)}
+.diff-img{max-height:48px;max-width:160px;object-fit:contain;background:#fff;border:1px solid var(--trait);border-radius:6px;padding:4px}
+.statut-d{font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:999px;background:#f2fbf6;color:var(--ok);flex:none;max-width:60%}
+.statut-d.refusee{background:#fff6f6;color:var(--rouge)}
+.vide-d{color:var(--doux);font-size:14px;padding:18px;border:1px dashed var(--trait-2);border-radius:var(--r);text-align:center}
+.sous-h{font-size:14px;margin:28px 0 12px;color:var(--doux);font-weight:500}
+.badge-maquette{font-size:12px;font-weight:600;color:var(--nuit);background:var(--cyan);border-radius:999px;padding:4px 10px;margin-right:6px}
+.onglets button,.etat-pub,.badge-maquette,.actions-tete .btn{white-space:nowrap}
+.maquette .actions-tete a.btn{display:none}
+@media (max-width:1280px){.etat-pub{display:none}}

@@ -14,6 +14,8 @@
   const DECALAGE = (() => { const v = q.get("simule"); if (!v) return 0; const t = Date.parse(v + ":00+01:00"); return isNaN(t) ? 0 : t - Date.now(); })();
   const maintenant = () => new Date(Date.now() + DECALAGE);
   const APERCU = q.has("apercu");
+  // Clé du brouillon prévisualisé : un par outil (gestion MTDI, espace exposant, maquettes) pour ne jamais se mélanger
+  const CLE_BROUILLON = "village.brouillon" + (q.get("cle") ? "." + q.get("cle").replace(/[^a-z]/g, "") : "");
   const MESURE = !DEMO && !APERCU && !MAQUETTE;
   const FULLY = typeof window.fully !== "undefined";
   const DANS_UN_CADRE = window.self !== window.parent;
@@ -63,7 +65,7 @@
 
   /* ---------- Chargement et mises à jour ---------- */
   async function charger() {
-    if (APERCU) { try { const b = JSON.parse(localStorage.getItem("village.brouillon")); if (b) return b; } catch {} }
+    if (APERCU) { try { const b = JSON.parse(localStorage.getItem(CLE_BROUILLON)); if (b) return b; } catch {} }
     try {
       const r = await fetch("/api/config", { cache: "no-store" });
       if (!r.ok) throw 0;
@@ -103,7 +105,7 @@
     garderEcranAllume();
     if (q.has("veille")) entrerVeille(); else { balayer(); armer(); }
     if (MESURE) { battement(); setInterval(() => verifierMaj().finally(battement), 60_000); }
-    if (APERCU) window.addEventListener("storage", (e) => { if (e.key === "village.brouillon" && e.newValue) appliquer(JSON.parse(e.newValue)); });
+    if (APERCU) window.addEventListener("storage", (e) => { if (e.key === CLE_BROUILLON && e.newValue) appliquer(JSON.parse(e.newValue)); });
   }
 
   async function verifierMaj() {

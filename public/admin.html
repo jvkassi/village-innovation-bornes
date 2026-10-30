@@ -29,6 +29,7 @@
     <div class="marque"><div class="logo logo-icon" aria-hidden="true"></div><b>Bornes du Village</b></div>
     <nav class="onglets" role="tablist">
       <button role="tab" data-onglet="stands" aria-selected="true">Espaces</button>
+      <button role="tab" data-onglet="demandes" aria-selected="false">Demandes <span class="pastille-n" id="n-demandes"></span></button>
       <button role="tab" data-onglet="programme" aria-selected="false">Programme</button>
       <button role="tab" data-onglet="suivi" aria-selected="false">Suivi en direct <span class="pastille-n" id="n-hors"></span></button>
       <button role="tab" data-onglet="reglages" aria-selected="false">Événement</button>
@@ -63,6 +64,16 @@
       <div class="tablette"><div class="ecran-t"><iframe id="apercu" title="Aperçu de la borne"></iframe></div></div>
       <p class="note">Ce que verra le visiteur. Les bornes reçoivent les changements dans la minute qui suit la publication.</p>
     </aside>
+  </main>
+
+  <!-- Demandes des exposants -->
+  <main class="onglet demandes" id="onglet-demandes" hidden>
+    <div class="prog-tete">
+      <div><h2>Demandes des exposants</h2><p>Chaque exposant propose ses contenus depuis son espace. Rien n'apparaît sur les tablettes avant votre validation.</p></div>
+    </div>
+    <div id="liste-demandes"></div>
+    <h3 class="sous-h">Déjà traitées</h3>
+    <div id="liste-traitees"></div>
   </main>
 
   <!-- Programme -->
@@ -153,6 +164,16 @@
   <p>Corrigez ces points puis publiez à nouveau :</p>
   <ul id="liste-erreurs"></ul>
   <form method="dialog"><button class="btn principal">Compris</button></form>
+</dialog>
+
+<dialog id="dlg-acces">
+  <h2>Accès créé</h2>
+  <p>Transmettez ces informations à l'exposant. <b>Le mot de passe n'est affiché qu'une fois</b> ; il le remplacera à sa première connexion.</p>
+  <pre class="acces" id="acces-texte"></pre>
+  <div style="display:flex;gap:8px;margin-top:14px">
+    <button class="btn principal" id="btn-copier-acces">Copier le message</button>
+    <form method="dialog"><button class="btn">Fermer</button></form>
+  </div>
 </dialog>
 
 <div class="toast" id="toast" role="status"></div>

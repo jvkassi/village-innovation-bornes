@@ -6,7 +6,10 @@
   const copie = (o) => JSON.parse(JSON.stringify(o));
   const fmtHeure = new Intl.DateTimeFormat("fr-FR", { dateStyle: "medium", timeStyle: "short", timeZone: "Africa/Porto-Novo" });
   const fmtJour = new Intl.DateTimeFormat("fr-FR", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" });
-  const jour = () => new Intl.DateTimeFormat("en-CA", { timeZone: "Africa/Porto-Novo" }).format(new Date());
+  // ?maquette=1 : démonstration sans connexion ni écriture, avec des données d'exemple (vitrine)
+  const MAQUETTE = new URLSearchParams(location.search).has("maquette");
+  const CLE = MAQUETTE ? "village.brouillon.maquette" : "village.brouillon";
+  const jour = () => (MAQUETTE ? "2026-11-18" : new Intl.DateTimeFormat("en-CA", { timeZone: "Africa/Porto-Novo" }).format(new Date()));
 
   const PICTOS = {
     globe: '<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.5 5.2 3.5 8.5s-1.1 6.1-3.5 8.5c-2.4-2.4-3.5-5.2-3.5-8.5s1.1-6.1 3.5-8.5"/>',
@@ -33,10 +36,11 @@
     suppr: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 7h14M10 7V5h4v2M7 7l1 13h8l1-13"/></svg>'
   };
 
-  let publie = null, brouillon = null, sel = 0, tablettes = [], vues = [], tSuivi;
+  let publie = null, brouillon = null, sel = 0, tablettes = [], vues = [], tSuivi, comptes = [], demandes = [];
 
   /* ---------- API ---------- */
   async function api(url, opts = {}) {
+    if (MAQUETTE) return apiMaquette(url, opts);
     const r = await fetch(url, { credentials: "same-origin", ...opts, headers: { "Content-Type": "application/json", ...(opts.headers || {}) } });
     const d = await r.json().catch(() => ({}));
     if (r.status === 401) { afficherConnexion(); throw new Error(d.erreur || "Session expirée"); }
@@ -55,18 +59,21 @@
   });
   $("#btn-sortir").addEventListener("click", async () => { await api("/api/admin/session", { method: "DELETE" }).catch(() => {}); afficherConnexion(); });
 
-  fetch("/api/admin/session").then((r) => r.json()).then((s) => (s.connecte ? demarrer() : afficherConnexion())).catch(afficherConnexion);
+  if (MAQUETTE) setTimeout(demarrer); // après la définition des données d'exemple, en fin de fichier
+  else fetch("/api/admin/session").then((r) => r.json()).then((s) => (s.connecte ? demarrer() : afficherConnexion())).catch(afficherConnexion);
 
   async function demarrer() {
     $("#connexion").hidden = true; $("#app").hidden = false;
     publie = await api("/api/admin/config");
     let b = null;
-    try { b = JSON.parse(localStorage.getItem("village.brouillon")); } catch {}
+    try { b = JSON.parse(localStorage.getItem(CLE)); } catch {}
     brouillon = b && b._base === (publie.version || 0) ? b : { ...copie(publie), _base: publie.version || 0 };
     (brouillon.espaces || []).forEach((e) => { e.solutions = e.solutions || []; });
     rendreTout();
-    chargerSuivi();
-    clearInterval(tSuivi); tSuivi = setInterval(chargerSuivi, 30_000);
+    chargerSuivi(); await chargerExposants();
+    const og = new URLSearchParams(location.search).get("onglet");
+    if (og) $(`.onglets [data-onglet="${og.replace(/[^a-z]/g, "")}"]`)?.click();
+    clearInterval(tSuivi); tSuivi = setInterval(() => { chargerSuivi(); chargerExposants(); }, 30_000);
   }
 
   /* ---------- Brouillon ---------- */
@@ -74,7 +81,7 @@
   let tSauve;
   function modifie({ liste = true } = {}) {
     clearTimeout(tSauve);
-    tSauve = setTimeout(() => { try { localStorage.setItem("village.brouillon", JSON.stringify(brouillon)); } catch {} }, 150);
+    tSauve = setTimeout(() => { try { localStorage.setItem(CLE, JSON.stringify(brouillon)); } catch {} }, 150);
     etatPublication();
     if (liste) rendreListe();
   }
@@ -91,6 +98,7 @@
     $$(".onglets button").forEach((x) => x.setAttribute("aria-selected", x === b));
     $$(".onglet").forEach((o) => (o.hidden = o.id !== "onglet-" + b.dataset.onglet));
     if (b.dataset.onglet === "suivi") chargerSuivi();
+    if (b.dataset.onglet === "demandes") chargerExposants();
   }));
 
   function rendreTout() { rendreListe(); rendreEdition(); rendreReglages(); rendreProgramme(); etatPublication(); }
@@ -210,6 +218,7 @@
           <label class="interrupteur large"><input type="checkbox" data-k="actif" ${e.actif !== false ? "checked" : ""}> Afficher cet espace sur les bornes et dans l'application</label>
         </div>`}
       </div>
+      ${e.type === "accueil" ? "" : blocAcces(e)}
       ${e.type === "accueil" ? "" : `
       <h2 class="sous-titre">À essayer sur la borne <small>${n} sur 4</small></h2>
       ${e.solutions.map((s, j) => blocSolution(s, j, n)).join("")}
@@ -217,6 +226,98 @@
       <datalist id="thematiques">${[...new Set(brouillon.espaces.map((x) => x.thematique).filter(Boolean))].map((t) => `<option value="${esc(t)}">`).join("")}</datalist>`;
     apercu();
   }
+
+  /* ---------- Accès exposant (comptes e-mail + mot de passe) ---------- */
+  function blocAcces(e) {
+    const cs = comptes.filter((c) => c.espace === e.id);
+    const enAttente = demandes.find((d) => d.espace === e.id && d.statut === "en_attente");
+    return `<div class="bloc acces-bloc">
+      <h3>Accès exposant <small>l'exposant met à jour sa fiche ; vous validez avant publication</small></h3>
+      ${enAttente ? `<p class="avertissement">Une demande de modification attend votre validation. <button class="lien" data-action="voir-demandes">Voir la demande</button></p>` : ""}
+      ${cs.length ? `<ul class="comptes">${cs.map((c) => `<li><span><b>${esc(c.email)}</b><small>${c.provisoire ? "Mot de passe provisoire, jamais connecté" : c.vuLe ? "Dernière connexion le " + fmtHeure.format(new Date(c.vuLe)) : "Actif"}</small></span>
+        <button class="btn" data-action="acces-reinit" data-email="${esc(c.email)}">Nouveau mot de passe</button>
+        <button class="btn icone danger" data-action="acces-suppr" data-email="${esc(c.email)}" title="Retirer l'accès">${I.suppr}</button></li>`).join("")}</ul>` : '<p class="aide" style="margin:0 0 10px">Aucun accès pour ce stand.</p>'}
+      <span class="url-ligne"><input type="email" id="acces-email" placeholder="contact@exposant.bj" value="${esc(cs.length ? "" : e.email || "")}"><button class="btn" data-action="acces-creer">Créer un accès</button></span>
+    </div>`;
+  }
+  function montrerAcces(e, r) {
+    const lien = `${location.origin}/exposant`;
+    $("#acces-texte").textContent = `Bonjour,
+
+Votre accès à l'espace exposant du Village de l'Innovation (stand ${e.numero || ""} — ${e.nom}) :
+
+Adresse : ${lien}
+E-mail : ${r.email}
+Mot de passe provisoire : ${r.motDePasse}
+
+Vous choisirez votre mot de passe à la première connexion. Vos modifications sont publiées sur les tablettes après validation par l'équipe du Village.`;
+    $("#dlg-acces").showModal();
+  }
+  $("#btn-copier-acces").addEventListener("click", () => navigator.clipboard.writeText($("#acces-texte").textContent).then(() => toast("Message copié.")));
+
+  /* ---------- Demandes des exposants ---------- */
+  async function chargerExposants() {
+    try {
+      const d = await api("/api/admin/exposants");
+      comptes = d.comptes || []; demandes = d.demandes || [];
+      const n = demandes.filter((x) => x.statut === "en_attente").length;
+      $("#n-demandes").textContent = n || "";
+      rendreDemandes();
+      const b = $(".acces-bloc"); const e = brouillon?.espaces[sel];
+      if (b && e && !b.contains(document.activeElement)) b.outerHTML = blocAcces(e);
+    } catch {}
+  }
+  const LIBELLES = { nomComplet: "Nom complet", accroche: "Accroche", presentation: "Présentation", activites: "Activités", reperes: "Repères", site: "Site web", email: "E-mail", telephone: "Téléphone", logo: "Logo", image: "Image", solutions: "Solutions à essayer" };
+  function valeur(k, v) {
+    if (k === "logo" || k === "image") return v ? `<img class="diff-img" src="${esc(v)}" alt="">` : "<i>aucun</i>";
+    if (k === "activites") return (v || []).length ? `<ul>${v.map((a) => `<li>${esc(a)}</li>`).join("")}</ul>` : "<i>aucune</i>";
+    if (k === "reperes") return (v || []).length ? `<ul>${v.map((r) => `<li>${esc(r.texte)}${r.source ? ` <a href="${esc(r.source)}" target="_blank" rel="noopener">source</a>` : ""}</li>`).join("")}</ul>` : "<i>aucun</i>";
+    if (k === "solutions") return (v || []).length ? `<ul>${v.map((x) => `<li><b>${esc(x.nom)}</b> — ${x.type === "app" ? "application " + esc(x.android || "") : `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.url)}</a>`}</li>`).join("")}</ul>` : "<i>aucune</i>";
+    return v ? esc(v) : "<i>vide</i>";
+  }
+  function carteDemande(d, actions) {
+    const e = publie.espaces.find((x) => x.id === d.espace) || { nom: d.espace };
+    const diffs = Object.keys(LIBELLES).filter((k) => k in d.doc && JSON.stringify(d.doc[k] ?? "") !== JSON.stringify(e[k] ?? ""));
+    return `<article class="demande" data-id="${d.id}">
+      <header><div><b>${esc(e.nom)}</b>${e.numero ? ` <span class="tag">Stand ${esc(e.numero)}</span>` : ""}<small>${esc(d.email)} · envoyée le ${fmtHeure.format(new Date(d.soumisLe))}</small></div>
+        ${actions ? `<div class="outils"><button class="btn" data-refuser="${d.id}">Refuser</button><button class="btn principal" data-accepter="${d.id}">Valider et publier</button></div>`
+          : `<span class="statut-d ${d.statut}">${d.statut === "acceptee" ? "Validée" : "Refusée"}${d.traiteLe ? " le " + fmtHeure.format(new Date(d.traiteLe)) : ""}${d.motif ? " · " + esc(d.motif) : ""}</span>`}</header>
+      ${actions ? (diffs.length ? `<table class="diff"><thead><tr><th></th><th>En ligne</th><th>Proposé</th></tr></thead><tbody>${diffs.map((k) => `<tr><th>${LIBELLES[k]}</th><td>${valeur(k, e[k])}</td><td class="nouveau">${valeur(k, d.doc[k])}</td></tr>`).join("")}</tbody></table>` : '<p class="aide">Aucune différence avec la fiche en ligne.</p>') : ""}
+    </article>`;
+  }
+  function rendreDemandes() {
+    if (!publie) return;
+    const att = demandes.filter((d) => d.statut === "en_attente"), tr = demandes.filter((d) => d.statut !== "en_attente");
+    $("#liste-demandes").innerHTML = att.length ? att.map((d) => carteDemande(d, true)).join("") : '<p class="vide-d">Aucune demande en attente.</p>';
+    $("#liste-traitees").innerHTML = tr.length ? tr.map((d) => carteDemande(d, false)).join("") : '<p class="vide-d">Rien pour l\'instant.</p>';
+  }
+  $("#onglet-demandes").addEventListener("click", async (ev) => {
+    const ac = ev.target.closest("[data-accepter]"), rf = ev.target.closest("[data-refuser]");
+    if (!ac && !rf) return;
+    const id = +(ac || rf).dataset[ac ? "accepter" : "refuser"];
+    try {
+      if (rf) {
+        const motif = prompt("Motif du refus, transmis à l'exposant (facultatif) :");
+        if (motif === null) return;
+        await api("/api/admin/exposants", { method: "POST", body: JSON.stringify({ action: "refuser", id, motif }) });
+        toast("Demande refusée. L'exposant voit le motif dans son espace.");
+      } else {
+        const d = demandes.find((x) => x.id === id);
+        publie = await api("/api/admin/exposants", { method: "POST", body: JSON.stringify({ action: "accepter", id }) });
+        // Le brouillon en cours reçoit la fiche publiée de ce stand, le reste est conservé
+        const ep = publie.espaces.find((x) => x.id === d.espace);
+        const i = brouillon.espaces.findIndex((x) => x.id === d.espace);
+        if (ep && i >= 0) brouillon.espaces[i] = copie(ep);
+        brouillon._base = publie.version;
+        modifie(); rendreTout();
+        toast("Validé et publié. Les tablettes affichent la nouvelle fiche d'ici une minute.");
+      }
+      chargerExposants();
+    } catch (e) {
+      const errs = e.donnees?.erreurs;
+      if (errs?.length) { $("#liste-erreurs").innerHTML = errs.map((x) => `<li>${esc(x)}</li>`).join(""); $("#dlg-erreurs").showModal(); } else toast(e.message);
+    }
+  });
 
   function blocSolution(s, j, n) {
     const web = s.type !== "app";
@@ -249,7 +350,7 @@
             <span class="url-ligne"><input type="url" data-ks="url" value="${esc(s.url)}" placeholder="https://"><button class="btn" data-action="verifier">Vérifier</button><button class="btn" data-action="tester">Ouvrir</button></span>
             <span class="verif" data-verif></span>
           </label>` : `
-          ${brouillon.espaces[sel]?.plateforme === "ipad" ? `<p class="alerte large">Cet espace est sur iPad : une application installée ne pourra pas être ouverte depuis la borne. Publication bloquée tant que ce n'est pas réglé.</p>` : `<p class="aide large">Pour une application installée, prévoyez avec son porteur un mode démonstration sans connexion personnelle, ou une déconnexion automatique : la borne ne peut pas remettre l'application à zéro entre deux visiteurs.</p>`}
+          ${brouillon.espaces[sel]?.plateforme === "ipad" ? `<p class="avertissement large">Cet espace est sur iPad : une application installée ne pourra pas être ouverte depuis la borne. Publication bloquée tant que ce n'est pas réglé.</p>` : `<p class="aide large">Pour une application installée, prévoyez avec son porteur un mode démonstration sans connexion personnelle, ou une déconnexion automatique : la borne ne peut pas remettre l'application à zéro entre deux visiteurs.</p>`}
           <label>Paquet Android<input data-ks="android" value="${esc(s.android)}" placeholder="com.exemple.app"><small>Visible dans le lien Play Store : id=…</small></label>
           <label>Lien d'ouverture iOS<input data-ks="ios" value="${esc(s.ios)}" placeholder="exemple://"><small>Fourni par le porteur de l'application.</small></label>
           <label class="large">Page de l'application (pour le QR code)<input type="url" data-ks="url" value="${esc(s.url)}" placeholder="https://"></label>`}
@@ -283,6 +384,7 @@
     const pourStand = ev.target.matches("[data-fichier-stand]");
     if (!ev.target.matches("[data-fichier]") && !pourStand) return;
     const f = ev.target.files[0]; if (!f) return;
+    if (MAQUETTE) return toast("Maquette : l'envoi d'images est désactivé.");
     const j = pourStand ? -1 : +ev.target.closest("[data-s]").dataset.s;
     if (f.size > 2e6) return toast("Image trop lourde : 2 Mo maximum.");
     try {
@@ -319,6 +421,27 @@
       case "sol-monter": echanger(S, j, j - 1); break;
       case "sol-descendre": echanger(S, j, j + 1); break;
       case "sol-supprimer": S.splice(j, 1); break;
+      case "voir-demandes": return $('.onglets [data-onglet="demandes"]').click();
+      case "acces-creer": {
+        const email = $("#acces-email").value.trim();
+        if (!email) return toast("Indiquez l'e-mail de l'exposant.");
+        try { montrerAcces(e, await api("/api/admin/exposants", { method: "POST", body: JSON.stringify({ action: "creer", email, espace: e.id }) })); chargerExposants(); }
+        catch (err) { toast(err.message); }
+        return;
+      }
+      case "acces-reinit": {
+        const email = ev.target.closest("[data-email]").dataset.email;
+        if (!confirm(`Générer un nouveau mot de passe provisoire pour ${email} ? L'ancien ne fonctionnera plus.`)) return;
+        try { montrerAcces(e, await api("/api/admin/exposants", { method: "POST", body: JSON.stringify({ action: "reinitialiser", email }) })); chargerExposants(); }
+        catch (err) { toast(err.message); }
+        return;
+      }
+      case "acces-suppr": {
+        const email = ev.target.closest("[data-email]").dataset.email;
+        if (!confirm(`Retirer l'accès de ${email} ?`)) return;
+        await api("/api/admin/exposants?email=" + encodeURIComponent(email), { method: "DELETE" }).catch((err) => toast(err.message));
+        return chargerExposants();
+      }
       case "logo-stand": return $('#edition [data-fichier-stand="logo"]').click();
       case "logo-stand-retirer": e.logo = ""; break;
       case "image-stand": return $('#edition [data-fichier-stand="image"]').click();
@@ -349,10 +472,10 @@
   /* ---------- Aperçu ---------- */
   let ecranApercu = "";
   function apercu() {
-    try { localStorage.setItem("village.brouillon", JSON.stringify(brouillon)); } catch {}
+    try { localStorage.setItem(CLE, JSON.stringify(brouillon)); } catch {}
     const e = brouillon.espaces[sel];
     const f = $("#apercu");
-    const src = e ? `/kiosk.html?apercu=1&espace=${encodeURIComponent(e.id)}${ecranApercu ? "&veille=1" : ""}` : "about:blank";
+    const src = e ? `/kiosk.html?apercu=1&espace=${encodeURIComponent(e.id)}${ecranApercu ? "&veille=1" : ""}${MAQUETTE ? "&cle=maquette&maquette=1&simule=2026-11-18T11:20" : ""}` : "about:blank";
     if (f.dataset.src !== src) { f.dataset.src = src; f.src = src; }
   }
   $$(".apercu .segment button").forEach((b) => b.addEventListener("click", () => {
@@ -506,4 +629,71 @@
     const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(new Blob([csv], { type: "text/csv" })), download: `village-bornes-${jour()}.csv` });
     a.click();
   });
+  /* ---------- Maquette : données d'exemple, aucune écriture ---------- */
+  let M = null;
+  async function apiMaquette(url, opts = {}) {
+    const m = (opts.method || "GET").toUpperCase();
+    const b = opts.body ? JSON.parse(opts.body) : {};
+    if (!M) {
+      const cfg = await fetch("/api/config", { cache: "no-store" }).then((r) => { if (!r.ok) throw 0; return r.json(); }).catch(() => fetch("/config/espaces.json").then((r) => r.json()));
+      cfg.publieLe = "2026-11-18T09:12:00+01:00";
+      let g = 7; const al = (n) => { g = (g * 9301 + 49297) % 233280; return Math.floor((g / 233280) * n); };
+      const J = "2026-11-18", now = Date.now();
+      const tabs = cfg.espaces.map((e, i) => {
+        const sols = e.solutions || [];
+        const sessions = { [J]: e.type === "accueil" ? 412 : 30 + al(120) };
+        const touches = { [J]: Object.fromEntries(sols.map((x) => [x.id, 8 + al(70)])) };
+        const ipad = i % 4 === 3;
+        return { id: "t" + i, nom: e.type === "accueil" ? "Accueil — entrée" : `Stand ${e.numero}`, espace: e.id,
+          ecran: ["accueil", "veille", "solution", "accueil", "veille"][i % 5], solution: sols[0]?.id,
+          batterie: i === 5 ? 14 : 38 + al(60), enCharge: i % 3 === 0, version: cfg.version,
+          navigateur: ipad ? "iPad 10e génération · iPadOS 17 · Accès guidé" : "Galaxy Tab A8 · Android 13 · Fully Kiosk",
+          vuLe: new Date(now - (i === 9 ? 42 * 60_000 : 15_000 + al(40_000))).toISOString(), sessions, touches };
+      });
+      const vues = cfg.espaces.filter((e) => e.type !== "accueil").map((e) => ({ jour: J, exposant: e.id, n: 12 + al(140) }));
+      const fe = (id) => cfg.espaces.find((e) => e.id === id) || {};
+      const demandes = [];
+      const fd = fe("fedapay");
+      if (fd.id) demandes.push({ id: 101, espace: "fedapay", email: "marketing@fedapay.com", statut: "en_attente", soumisLe: "2026-11-18T10:47:00+01:00",
+        doc: { accroche: "Encaisser par mobile money et carte en deux minutes, partout en Afrique.", activites: [...(fd.activites || []), "Boutiques en ligne clés en main avec Yaburu.shop"] } });
+      const gz = fe("gozem");
+      if (gz.id) demandes.push({ id: 102, espace: "gozem", email: "partenariats@gozem.co", statut: "en_attente", soumisLe: "2026-11-18T11:05:00+01:00",
+        doc: { telephone: "+229 01 00 00 00 00", presentation: (gz.presentation || "") + " Au Village, essayez une course en direct depuis la tablette." } });
+      demandes.push({ id: 99, espace: "kkiapay", email: "contact@kkiapay.me", statut: "acceptee", soumisLe: "2026-11-17T16:20:00+01:00", traiteLe: "2026-11-17T17:02:00+01:00", doc: {} });
+      demandes.push({ id: 98, espace: "ylomi", email: "hello@ylomi.bj", statut: "refusee", soumisLe: "2026-11-17T12:10:00+01:00", traiteLe: "2026-11-17T14:30:00+01:00", motif: "Logo trop petit, merci d'envoyer une version plus grande", doc: {} });
+      const comptes = cfg.espaces.filter((e) => e.type !== "accueil").slice(0, 12).map((e, i) => ({ email: `stand${e.numero}@exposant.bj`, espace: e.id, provisoire: i % 5 === 4, vuLe: i % 5 === 4 ? null : "2026-11-18T08:3" + (i % 10) + ":00+01:00" }));
+      M = { cfg, tabs, vues, demandes, comptes };
+    }
+    const chemin = url.split("?")[0];
+    const attendre = (v) => new Promise((r) => setTimeout(() => r(v), 250));
+    if (chemin === "/api/admin/config") {
+      if (m === "PUT") { M.cfg = { ...b, version: Date.now(), publieLe: new Date().toISOString() }; toast("Maquette : rien n'est publié sur de vraies tablettes."); return attendre(copie(M.cfg)); }
+      return copie(M.cfg);
+    }
+    if (chemin === "/api/admin/tablettes") return m === "DELETE" ? { ok: true } : { tablettes: copie(M.tabs).map((t) => ({ ...t, vuLe: t.id === "t9" ? t.vuLe : new Date(Date.now() - 20_000).toISOString() })), vues: copie(M.vues) };
+    if (chemin === "/api/admin/historique") return m === "POST" ? copie(M.cfg) : [{ version: Date.parse(M.cfg.publieLe), auteur: "admin" }, { version: Date.parse("2026-11-17T18:40:00+01:00"), auteur: "admin" }];
+    if (chemin === "/api/admin/verifier") return attendre({ accessible: true, statut: 200 });
+    if (chemin === "/api/admin/session") return { ok: true };
+    if (chemin === "/api/admin/exposants") {
+      if (m === "GET") return { comptes: copie(M.comptes), demandes: copie(M.demandes) };
+      if (m === "DELETE") { const em = new URLSearchParams(url.split("?")[1]).get("email"); M.comptes = M.comptes.filter((c) => c.email !== em); return { ok: true }; }
+      if (b.action === "creer" || b.action === "reinitialiser") {
+        const c = M.comptes.find((x) => x.email === b.email) || { email: b.email.toLowerCase(), espace: b.espace }; c.provisoire = true;
+        if (!M.comptes.includes(c)) M.comptes.push(c);
+        return attendre({ email: c.email, motDePasse: "demo-7k2p-x9qa" });
+      }
+      const d = M.demandes.find((x) => x.id === b.id);
+      d.traiteLe = new Date().toISOString();
+      if (b.action === "refuser") { d.statut = "refusee"; d.motif = b.motif || null; return { ok: true }; }
+      d.statut = "acceptee";
+      M.cfg = copie(M.cfg); const e = M.cfg.espaces.find((x) => x.id === d.espace); Object.assign(e, d.doc);
+      M.cfg.version = Date.now(); M.cfg.publieLe = new Date().toISOString();
+      return attendre(copie(M.cfg));
+    }
+    return {};
+  }
+  if (MAQUETTE) {
+    document.documentElement.classList.add("maquette");
+    $("#etat-pub").insertAdjacentHTML("beforebegin", '<span class="badge-maquette">Maquette</span>');
+  }
 })();
