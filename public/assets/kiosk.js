@@ -146,6 +146,13 @@
 
   const puces = (l, n) => (Array.isArray(l) ? l : []).slice(0, n).map((a) => `<li>${esc(a)}</li>`).join("");
 
+  // Retire les dernières activités tant que l'écran déborde : la borne ne défile jamais.
+  function ajuster() {
+    const ec = $("ecran-exposant"), ul = $("ex-activites");
+    while (ul.children.length && ec.scrollHeight > ec.clientHeight + 1) ul.lastElementChild.remove();
+  }
+  addEventListener("resize", () => { if (espace && espace.type !== "accueil") { $("ex-activites").innerHTML = puces(espace.activites, 4); ajuster(); } });
+
   function rendreExposant() {
     const e = espace, s = sols();
     $("ex-stand").textContent = e.numero ? `Stand ${e.numero}` : "";
@@ -165,6 +172,7 @@
         <span class="aller">${x.type === "app" ? "Ouvrir" : "Essayer"}${FLECHE}</span>
       </button>`).join("");
     $("ex-qr").innerHTML = qr(lienApp(e.id));
+    requestAnimationFrame(ajuster);
     let site = "";
     try { site = e.site ? new URL(e.site).hostname.replace(/^www\./, "") : ""; } catch {}
     $("ex-contact").textContent = [site, e.email, e.telephone].filter(Boolean).join("  ·  ");
@@ -267,7 +275,7 @@
     $("f-titre").textContent = e.nom;
     $("f-accroche").textContent = e.accroche || "";
     $("f-texte").textContent = e.presentation || "";
-    $("f-activites").innerHTML = puces(e.activites, 4);
+    $("f-activites").innerHTML = puces(e.activites, 3);
     $("f-qr").innerHTML = `<div class="qr">${qr(lienApp(e.id))}</div><small><b>Sur votre téléphone</b>La fiche, les contacts et le chemin jusqu'au stand${e.numero ? " " + esc(e.numero) : ""}.</small>`;
     ouvrirFeuille();
   }
