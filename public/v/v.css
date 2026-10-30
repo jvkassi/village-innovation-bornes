@@ -147,3 +147,17 @@ h2.section{font-size:14px;font-weight:500;color:var(--doux);margin:26px 0 10px}
 @keyframes entree{from{opacity:0;transform:translateY(8px)}}
 @media (prefers-reduced-motion:reduce){.entree{animation:none}}
 @media (min-width:560px){.hero h1{font-size:56px}.fiche h1{font-size:56px}}
+
+/* Fiche enrichie */
+.fiche .nom-complet{font-size:13px;line-height:1.4;color:var(--doux);margin-top:6px}
+.apercu{margin:24px 0 0;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:#0b1d40}
+.apercu img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top}
+.apercu figcaption{font-size:12px;color:var(--doux);padding:8px 12px;border-top:1px solid rgba(255,255,255,.08)}
+.activites{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.activites li{position:relative;padding-left:20px;font-size:15px;line-height:1.45}
+.activites li::before{content:"";position:absolute;left:2px;top:.5em;width:8px;height:8px;border-radius:2px;background:var(--cyan);transform:rotate(45deg)}
+.reperes{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.reperes li{font-size:14px;line-height:1.5;color:var(--doux);padding:10px 12px;border-left:2px solid var(--cyan);background:rgba(255,255,255,.03);border-radius:0 10px 10px 0}
+.reperes a{color:var(--cyan);font-size:12px;white-space:nowrap}
+.sol .vignette{width:56px;height:56px;border-radius:10px;object-fit:cover;object-position:top;flex:none}
+.sol:has(.vignette){grid-template-columns:auto 1fr auto}

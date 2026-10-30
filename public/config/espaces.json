@@ -97,8 +97,8 @@
       "numero": "1",
       "nom": "Services publics en ligne",
       "thematique": "Services publics",
-      "accroche": "Les démarches administratives, en ligne.",
-      "presentation": "Le portail national service-public.bj réunit les démarches administratives des citoyens et des entreprises. La plateforme e-Visa permet de demander et de suivre un visa d'entrée au Bénin.",
+      "accroche": "Vos démarches administratives et votre visa, en ligne, sur un portail unique.",
+      "presentation": "Service-public.bj est le site officiel de l'administration béninoise : le portail unique de renseignement administratif et d'accès aux services en ligne. Il informe les usagers sur leurs droits et obligations et les oriente vers leurs démarches. La plateforme e-Visa permet aux étrangers de demander leur visa en ligne.",
       "site": "https://service-public.bj/",
       "email": "",
       "telephone": "",
@@ -122,9 +122,25 @@
           "type": "web",
           "url": "https://evisa.bj/",
           "icone": "passport",
-          "logo": ""
+          "logo": "",
+          "apercu": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-evisa.jpg"
         }
-      ]
+      ],
+      "nomComplet": "Portail national des services publics du Bénin (service-public.bj) et plateforme e-Visa",
+      "activites": [
+        "Fiches des démarches classées par administration et par thème",
+        "Demande en ligne de l'extrait B3 du casier judiciaire",
+        "Demande de visa électronique (e-Visa) pour les étrangers",
+        "Paiement en ligne des services, notamment via BjPay du Trésor",
+        "Paiement en ligne des factures SBEE et SONEB"
+      ],
+      "reperes": [
+        {
+          "texte": "Visa électronique encadré par le décret n° 2026-049 du 4 mars 2026 sur les visas et cartes de résident",
+          "source": "https://service-public.bj/public/services/service/PS00005"
+        }
+      ],
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-service-public.jpg"
     },
     {
       "id": "anip",
@@ -132,12 +148,12 @@
       "numero": "2",
       "nom": "ANIP",
       "thematique": "Services publics",
-      "accroche": "Identification des personnes et état civil numérique.",
-      "presentation": "L'Agence Nationale d'Identification des Personnes gère l'identification et l'état civil. En ligne : faire une demande, retrouver son NPI, mettre à jour son numéro ou sa photo, vérifier un document.",
+      "accroche": "Votre identité, votre NPI et vos actes d'état civil, au même endroit.",
+      "presentation": "L'ANIP est créée par la loi n° 2017-08 du 19 juin 2017 et placée sous la tutelle du Président de la République. Elle gère le Registre national d'identification des personnes et attribue le Numéro Personnel d'Identification (NPI). Elle délivre la carte d'identité biométrique et des actes d'état civil, en ligne et via l'application ANIP BJ.",
       "site": "https://anip.bj/",
       "email": "contact@anip.bj",
       "telephone": "",
-      "logo": "",
+      "logo": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/logos/seed-logo-anip.png",
       "consigne": "Touchez un service pour l'essayer.",
       "actif": true,
       "solutions": [
@@ -150,7 +166,22 @@
           "icone": "id",
           "logo": ""
         }
-      ]
+      ],
+      "nomComplet": "Agence Nationale d'Identification des Personnes (ANIP)",
+      "activites": [
+        "Attribution du Numéro Personnel d'Identification (NPI)",
+        "Carte nationale d'identité biométrique (CNIB)",
+        "Actes de naissance et certificats de résidence en ligne",
+        "Certificats d'identification personnelle (CIP, CIPE, CIPA)",
+        "Vérification de l'authenticité des documents par QR code"
+      ],
+      "reperes": [
+        {
+          "texte": "Créée par la loi n° 2017-08 du 19 juin 2017 portant identification des personnes physiques",
+          "source": "https://anip.bj/cgu"
+        }
+      ],
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-anip.jpg"
     },
     {
       "id": "apiex",
@@ -158,12 +189,12 @@
       "numero": "3",
       "nom": "APIEx",
       "thematique": "Économie et finances",
-      "accroche": "Créer son entreprise, investir au Bénin.",
-      "presentation": "L'Agence de Promotion des Investissements et des Exportations accompagne les entrepreneurs et les investisseurs. Son guichet électronique MonEntreprise.bj permet de créer son entreprise en ligne.",
+      "accroche": "Créer son entreprise, investir ou exporter : un guichet unique pour démarrer.",
+      "presentation": "L'APIEx est un établissement public placé sous la tutelle de la Présidence de la République. Elle promeut les investissements et les exportations du Bénin. Elle organise le guichet unique de formalisation des entreprises, instruit les agréments au Code des investissements et agit comme autorité administrative des zones économiques spéciales.",
       "site": "https://monentreprise.bj/",
       "email": "contact@apiex.bj",
       "telephone": "",
-      "logo": "",
+      "logo": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/logos/seed-logo-apiex.png",
       "consigne": "Touchez un service pour l'essayer.",
       "actif": true,
       "solutions": [
@@ -185,7 +216,22 @@
           "icone": "route",
           "logo": ""
         }
-      ]
+      ],
+      "nomComplet": "Agence de Promotion des Investissements et des Exportations (APIEx)",
+      "activites": [
+        "Création d'entreprise en ligne sur monentreprise.bj",
+        "Instruction des agréments au Code des investissements",
+        "Guichet unique des formalités des zones économiques spéciales",
+        "Accompagnement des exportateurs vers les marchés étrangers",
+        "Analyse des projets de partenariat public-privé"
+      ],
+      "reperes": [
+        {
+          "texte": "Statuts modifiés approuvés par le décret n° 2025-527 du 10 septembre 2025",
+          "source": "https://sgg.gouv.bj/doc/decret-2025-527/download"
+        }
+      ],
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-monentreprise.jpg"
     },
     {
       "id": "dgi",
@@ -193,12 +239,12 @@
       "numero": "4",
       "nom": "Direction Générale des Impôts",
       "thematique": "Économie et finances",
-      "accroche": "Les impôts, en ligne.",
-      "presentation": "La Direction Générale des Impôts présente ses services en ligne aux contribuables, particuliers et entreprises.",
+      "accroche": "Obtenir son IFU, déclarer et payer ses impôts en ligne.",
+      "presentation": "La DGI est une régie financière du Ministère de l'Économie et des Finances. Elle est compétente pour les impôts directs, les impôts indirects hors importation et exportation, et les droits d'enregistrement et de timbre. Elle en détermine l'assiette, les contrôle et les liquide, et propose des téléprocédures aux contribuables.",
       "site": "https://www.impots.bj/",
       "email": "",
       "telephone": "",
-      "logo": "",
+      "logo": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/logos/seed-logo-dgi.png",
       "consigne": "Touchez un service pour l'essayer.",
       "actif": true,
       "solutions": [
@@ -211,7 +257,22 @@
           "icone": "receipt",
           "logo": ""
         }
-      ]
+      ],
+      "nomComplet": "Direction Générale des Impôts (DGI)",
+      "activites": [
+        "Immatriculation à l'Identifiant Fiscal Unique (IFU) en ligne",
+        "Télédéclaration et télépaiement sur e-services.impots.bj",
+        "Factures normalisées en ligne avec e-MECeF",
+        "Vérification de l'authenticité d'une facture normalisée",
+        "Demande d'attestation fiscale en ligne"
+      ],
+      "reperes": [
+        {
+          "texte": "Depuis juin 2022, les moyennes et grandes entreprises déclarent et paient leurs impôts en ligne (SIGIBé)",
+          "source": "https://api.impots.bj/media/69d0157dcf3f3_PROJET%20RAPPORT%20D'ACTIVIT%C3%89S%20DGI-2025.pdf"
+        }
+      ],
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-impots.jpg"
     },
     {
       "id": "dgtcp",
@@ -219,8 +280,8 @@
       "numero": "5",
       "nom": "Trésor public (DGTCP)",
       "thematique": "Économie et finances",
-      "accroche": "Les services en ligne du Trésor public.",
-      "presentation": "La Direction Générale du Trésor et de la Comptabilité Publique relève du Ministère de l'Économie et des Finances. Ses e-services : eQuittance pour le paiement en ligne, fiche de paie, fiche de pension, suivi des titres, eCollectivité.",
+      "accroche": "Le Trésor public : paiements à l'État, paie et pensions en ligne.",
+      "presentation": "La DGTCP est une régie financière du Ministère de l'Économie et des Finances. Elle a deux missions : le Trésor et la comptabilité publique. Elle gère la trésorerie de l'État et, avec la Caisse autonome d'amortissement, la dette publique. Elle recouvre les recettes non fiscales, paie les dépenses publiques et suit la réglementation des changes.",
       "site": "https://www.tresorbenin.bj/",
       "email": "courriers@tresorbenin.bj",
       "telephone": "",
@@ -237,7 +298,22 @@
           "icone": "wallet",
           "logo": ""
         }
-      ]
+      ],
+      "nomComplet": "Direction Générale du Trésor et de la Comptabilité Publique (DGTCP)",
+      "activites": [
+        "Paiement en ligne contre quittance du Trésor (eQuittance)",
+        "BjPay, solution de paiement du Trésor sur service-public.bj",
+        "Bulletins de paie des agents de l'État en ligne",
+        "Fiches de pension consultables en ligne",
+        "Suivi en ligne du traitement des titres de paiement"
+      ],
+      "reperes": [
+        {
+          "texte": "Attributions fixées par l'arrêté n° 125/MEF/DC/SGM/DGTCP/DRC/SP du 21 janvier 2022",
+          "source": "http://tresorbenin.bj/page/missions_attributions"
+        }
+      ],
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-tresor.jpg"
     },
     {
       "id": "educmaster",
@@ -245,8 +321,8 @@
       "numero": "6",
       "nom": "EducMaster",
       "thematique": "Éducation et santé",
-      "accroche": "Le système d'information de l'éducation.",
-      "presentation": "EducMaster est le portail national de l'éducation, porté par les ministères en charge de l'Éducation. Ce système d'information et de gestion couvre l'école, de la maternelle au secondaire.",
+      "accroche": "Le suivi scolaire et les examens, de la maternelle au secondaire.",
+      "presentation": "EducMaster est le système d'information et de gestion de l'éducation commun aux ministères en charge de l'Éducation. Il couvre la maternelle, le primaire et le secondaire, y compris technique et professionnel. Il gère apprenants, enseignants, établissements et emplois du temps, organise les examens et produit des statistiques.",
       "site": "https://educmaster.bj/",
       "email": "",
       "telephone": "",
@@ -263,7 +339,17 @@
           "icone": "school",
           "logo": ""
         }
-      ]
+      ],
+      "nomComplet": "EducMaster, système d'information et de gestion de l'éducation (SIGE) du Bénin",
+      "activites": [
+        "Gestion des apprenants, enseignants et établissements",
+        "Organisation des examens, dont le CEP",
+        "Relevés de notes du CEP téléchargeables sur emp.educmaster.bj",
+        "Vérification en ligne du déploiement des AME",
+        "Statistiques et cartographie par département"
+      ],
+      "reperes": [],
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-educmaster.jpg"
     },
     {
       "id": "sante",
@@ -271,12 +357,12 @@
       "numero": "7",
       "nom": "Ministère de la Santé",
       "thematique": "Éducation et santé",
-      "accroche": "La santé publique, en ligne.",
-      "presentation": "Le portail officiel du Ministère de la Santé publie l'actualité, les programmes et les informations de santé publique, et renvoie vers les e-services de service-public.bj.",
+      "accroche": "Numéros d'urgence, e-services et structures de santé publique du Bénin.",
+      "presentation": "Le Ministère de la Santé conçoit la politique de l'État en matière de santé et en assure le suivi-évaluation. Cette politique vise l'égal accès de tous à la santé et la réduction des inégalités sociales et territoriales. Il s'appuie sur des structures sous tutelle : soins de santé primaires, transfusion sanguine, régulation pharmaceutique, SAMU.",
       "site": "https://sante.gouv.bj/",
       "email": "sante.infos@gouv.bj",
       "telephone": "",
-      "logo": "",
+      "logo": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/logos/seed-logo-sante.png",
       "consigne": "Touchez un service pour l'essayer.",
       "actif": true,
       "solutions": [
@@ -289,7 +375,21 @@
           "icone": "pulse",
           "logo": ""
         }
-      ]
+      ],
+      "nomComplet": "Ministère de la Santé de la République du Bénin",
+      "activites": [
+        "Numéro vert d'information sanitaire : 136 (appel gratuit)",
+        "SAMU : numéro vert national 112",
+        "Autorisation d'ouverture d'un établissement pharmaceutique en ligne",
+        "Programmes nationaux de lutte contre le paludisme et le sida"
+      ],
+      "reperes": [
+        {
+          "texte": "Attributions fixées par le décret n° 2021-571 du 3 novembre 2021",
+          "source": "https://sgg.gouv.bj/doc/decret-2021-571/download"
+        }
+      ],
+      "image": ""
     },
     {
       "id": "sbee",
@@ -297,12 +397,12 @@
       "numero": "8",
       "nom": "SBEE",
       "thematique": "Énergie et eau",
-      "accroche": "L'électricité : payer, recharger, se raccorder.",
-      "presentation": "La Société Béninoise d'Énergie Électrique distribue l'électricité au Bénin. En ligne : payer sa facture, recharger son compteur, demander un raccordement.",
+      "accroche": "Raccordement, recharge de compteur et paiement de facture d'électricité.",
+      "presentation": "La SBEE est une société anonyme dont l'État béninois est l'actionnaire unique. Elle distribue et commercialise l'énergie électrique sur le périmètre qui lui est concédé et mène des activités d'électrification rurale. Sa mission : exploiter et étendre son réseau pour fournir une alimentation fiable et accroître l'accès à l'électricité.",
       "site": "https://sbee.bj/",
       "email": "",
       "telephone": "",
-      "logo": "",
+      "logo": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/logos/seed-logo-sbee.png",
       "consigne": "Touchez un service pour l'essayer.",
       "actif": true,
       "solutions": [
@@ -315,7 +415,26 @@
           "icone": "sun",
           "logo": ""
         }
-      ]
+      ],
+      "nomComplet": "Société Béninoise d'Énergie Électrique (SBEE S.A.)",
+      "activites": [
+        "Recharge des compteurs à prépaiement en ligne",
+        "Paiement des factures post-payées sur sbee.service-public.bj",
+        "Suivi des factures et recharges sur l'espace maSBEE",
+        "Raccordement des PME/PMI de 50 à 250 kVA (programme spécial)",
+        "Centre d'appel 7302, joignable 24h/24"
+      ],
+      "reperes": [
+        {
+          "texte": "Statuts modifiés approuvés par le décret n° 2025-689 du 5 novembre 2025",
+          "source": "https://sgg.gouv.bj/doc/decret-2025-689/download"
+        },
+        {
+          "texte": "Statuts précédents approuvés par le décret n° 2004-098 du 1er mars 2004",
+          "source": "https://sgg.gouv.bj/doc/decret-2025-689/download"
+        }
+      ],
+      "image": ""
     },
     {
       "id": "soneb",
@@ -323,12 +442,12 @@
       "numero": "9",
       "nom": "SONEB",
       "thematique": "Énergie et eau",
-      "accroche": "L'eau potable : vos factures en un clic.",
-      "presentation": "La Société Nationale des Eaux du Bénin, certifiée ISO 9001:2015, propose le paiement des factures d'eau en ligne et la demande de branchement.",
+      "accroche": "Eau potable en ville : abonnement, branchement et paiement des factures.",
+      "presentation": "La SONEB est une société anonyme unipersonnelle à caractère industriel et commercial, placée sous la tutelle du ministère chargé de l'Eau. Elle assure le service public de l'eau potable dans les centres urbains du Bénin : captage, traitement, distribution, extension et entretien du réseau.",
       "site": "https://web.soneb.bj/",
       "email": "",
       "telephone": "",
-      "logo": "",
+      "logo": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/logos/seed-logo-soneb.png",
       "consigne": "Touchez un service pour l'essayer.",
       "actif": true,
       "solutions": [
@@ -341,7 +460,26 @@
           "icone": "leaf",
           "logo": ""
         }
-      ]
+      ],
+      "nomComplet": "Société Nationale des Eaux du Bénin (SONEB S.A.)",
+      "activites": [
+        "Abonnement, branchement, réabonnement et résiliation",
+        "Paiement des factures d'eau en ligne (soneb.service-public.bj)",
+        "Production et distribution d'eau potable en milieu urbain",
+        "Raccordement gratuit des PME et PMI",
+        "Signalement des eaux troubles"
+      ],
+      "reperes": [
+        {
+          "texte": "Créée par le décret n° 2003-203 du 12 juin 2003, après la séparation des activités eau et électricité",
+          "source": "https://web.soneb.bj/pg-genese-mission"
+        },
+        {
+          "texte": "Certifiée ISO 9001:2015 en 2017, certification renouvelée en 2020 (selon la SONEB)",
+          "source": "https://web.soneb.bj/pg-genese-mission"
+        }
+      ],
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-soneb.jpg"
     },
     {
       "id": "semecity",
@@ -349,12 +487,12 @@
       "numero": "10",
       "nom": "Sèmè City",
       "thematique": "Innovation et télécoms",
-      "accroche": "La cité internationale de l'innovation et du savoir.",
-      "presentation": "Sèmè City forme une nouvelle génération de talents, promeut l'entrepreneuriat innovant et accueille innovateurs et chercheurs. Sa mission : répondre aux enjeux d'employabilité des jeunes.",
+      "accroche": "Se former, entreprendre et innover dans les métiers d'avenir au Bénin.",
+      "presentation": "Sèmè City est un projet de l'État béninois lancé en 2017. Elle réunit étudiants, entrepreneurs et chercheurs autour de la formation, de l'entrepreneuriat et de la recherche, pour répondre aux besoins de compétences des marchés africains. Son développement est confié à l'Agence de Développement de Sèmè City (ADSC), établissement public.",
       "site": "https://semecity.bj/",
       "email": "semecity@presidence.bj",
       "telephone": "",
-      "logo": "",
+      "logo": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/logos/seed-logo-semecity.png",
       "consigne": "Touchez un service pour l'essayer.",
       "actif": true,
       "solutions": [
@@ -367,7 +505,21 @@
           "icone": "chip",
           "logo": ""
         }
-      ]
+      ],
+      "nomComplet": "Sèmè City, cité internationale de l'innovation et du savoir",
+      "activites": [
+        "Formations Bac+3 à Bac+5 : code, IA, design, écoconstruction",
+        "Formation continue pour les professionnels",
+        "Incubation et accompagnement de startups",
+        "Recherche appliquée aux défis socio-économiques africains"
+      ],
+      "reperes": [
+        {
+          "texte": "Agence de Développement de Sèmè City créée par le décret n° 2017-440 du 31 août 2017",
+          "source": "https://sgg.gouv.bj/doc/decret-2017-440/download"
+        }
+      ],
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-semecity.jpg"
     },
     {
       "id": "celtiis",
@@ -375,12 +527,12 @@
       "numero": "11",
       "nom": "Celtiis",
       "thematique": "Innovation et télécoms",
-      "accroche": "L'opérateur de télécommunications de la SBIN.",
-      "presentation": "Celtiis est l'opérateur de télécommunications de la Société Béninoise d'Infrastructures Numériques (SBIN), lancé comme troisième opérateur mobile du Bénin.",
+      "accroche": "Mobile, fibre à domicile et mobile money d'un opérateur public béninois.",
+      "presentation": "Celtiis est la marque commerciale de la SBIN, société anonyme créée par l'État béninois, son actionnaire unique. La SBIN gère et exploite des infrastructures de télécommunications, dont un réseau national de fibre optique. Sous la marque Celtiis, elle propose téléphonie mobile et fixe, internet par fibre, offres pour entreprises et mobile money.",
       "site": "https://www.celtiis.bj/",
       "email": "",
       "telephone": "",
-      "logo": "",
+      "logo": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/logos/seed-logo-celtiis.svg",
       "consigne": "Touchez un service pour l'essayer.",
       "actif": true,
       "solutions": [
@@ -393,7 +545,26 @@
           "icone": "phone",
           "logo": ""
         }
-      ]
+      ],
+      "nomComplet": "Celtiis, marque de la Société Béninoise d'Infrastructures Numériques (SBIN S.A.)",
+      "activites": [
+        "Téléphonie et internet mobiles",
+        "Internet par fibre optique à domicile",
+        "Celtiis Cash : transfert d'argent et paiement de factures",
+        "Celtiis Business : solutions pour entreprises et administrations",
+        "Vente en gros de capacités (wholesale)"
+      ],
+      "reperes": [
+        {
+          "texte": "Statuts de la SBIN approuvés par le décret n° 2018-552 du 12 décembre 2018",
+          "source": "https://sgg.gouv.bj/upload/files/documentheque/0852257001547722835.pdf"
+        },
+        {
+          "texte": "Lancement commercial de Celtiis le 21 octobre 2022",
+          "source": "https://www.agenceecofin.com/operateur/1311-113584-benin-celtiis-a-enregistre-1-5-million-d-abonnes-en-un-an-d-activite"
+        }
+      ],
+      "image": "https://gxwuad6cv00d2sy6.public.blob.vercel-storage.com/apercus/seed-apercu-celtiis.jpg"
     }
   ]
 }

@@ -186,13 +186,19 @@
             <label>Thématique<input data-k="thematique" value="${esc(e.thematique)}" maxlength="40" list="thematiques" placeholder="Services publics"></label>
           </div>
           <label class="large">Accroche <small>une ligne, affichée en grand</small><input data-k="accroche" value="${esc(e.accroche)}" maxlength="90" placeholder="Ce que l'exposant apporte, en une phrase."></label>
-          <label class="large">Présentation <small>3 phrases au plus</small><textarea data-k="presentation" maxlength="600" rows="3">${esc(e.presentation)}</textarea></label>
+          <label class="large">Nom complet <small>dans l'application visiteur</small><input data-k="nomComplet" value="${esc(e.nomComplet || "")}" maxlength="140" placeholder="Agence nationale d'…"></label>
+          <label class="large">Présentation <small>3 phrases au plus</small><textarea data-k="presentation" maxlength="700" rows="3">${esc(e.presentation)}</textarea></label>
+          <label class="large">Ce que fait l'exposant <small>une activité par ligne, 6 au plus ; les 4 premières sur la borne</small><textarea data-kl="activites" rows="4" placeholder="Délivrance de la carte d'identité biométrique">${esc((e.activites || []).join("\n"))}</textarea></label>
+          <label class="large">Repères <small>un par ligne : texte | https://source</small><textarea data-kl="reperes" rows="2" placeholder="Créée par la loi n° … | https://…">${esc((e.reperes || []).map((r) => r.texte + (r.source ? " | " + r.source : "")).join("\n"))}</textarea></label>
           <label>Site web<input type="url" data-k="site" value="${esc(e.site)}" placeholder="https://"></label>
           <label>E-mail de contact<input type="email" data-k="email" value="${esc(e.email)}" placeholder="contact@exemple.bj"></label>
           <label>Téléphone<input data-k="telephone" value="${esc(e.telephone)}" placeholder="+229 …"></label>
           <label>Logo de l'exposant
             <span class="url-ligne">${e.logo ? `<img class="logo-mini" src="${esc(e.logo)}" alt="">` : ""}<button class="btn" data-action="logo-stand">${e.logo ? "Changer" : "Envoyer un logo"}</button>${e.logo ? '<button class="btn" data-action="logo-stand-retirer">Retirer</button>' : ""}</span>
-            <input type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" hidden data-fichier-stand></label>
+            <input type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" hidden data-fichier-stand="logo"></label>
+          <label>Image ou capture <small>affichée sur la fiche téléphone</small>
+            <span class="url-ligne">${e.image ? `<img class="logo-mini" src="${esc(e.image)}" alt="">` : ""}<button class="btn" data-action="image-stand">${e.image ? "Changer" : "Envoyer une image"}</button>${e.image ? '<button class="btn" data-action="image-stand-retirer">Retirer</button>' : ""}</span>
+            <input type="file" accept="image/png,image/jpeg,image/webp" hidden data-fichier-stand="image"></label>
           <label class="interrupteur large"><input type="checkbox" data-k="actif" ${e.actif !== false ? "checked" : ""}> Afficher ce stand sur les bornes et dans l'application</label>
         </div>`}
       </div>
@@ -249,6 +255,12 @@
     if (t.dataset.k) {
       e[t.dataset.k] = t.type === "checkbox" ? t.checked : t.value;
       if (t.dataset.k === "nom") $("#edition h1").textContent = t.value || "Sans nom";
+    } else if (t.dataset.kl === "activites") {
+      e.activites = t.value.split("\n").map((x) => x.trim()).filter(Boolean).slice(0, 6);
+    } else if (t.dataset.kl === "reperes") {
+      e.reperes = t.value.split("\n").map((x) => x.trim()).filter(Boolean).slice(0, 3).map((x) => {
+        const m = x.match(/^(.*?)\s*\|\s*(https:\/\/\S+)\s*$/); return m ? { texte: m[1], source: m[2] } : { texte: x, source: "" };
+      });
     } else if (t.dataset.ks) {
       const j = +t.closest("[data-s]").dataset.s;
       e.solutions[j][t.dataset.ks] = t.value;
@@ -265,13 +277,13 @@
     const j = pourStand ? -1 : +ev.target.closest("[data-s]").dataset.s;
     if (f.size > 2e6) return toast("Image trop lourde : 2 Mo maximum.");
     try {
-      toast("Envoi du logo…");
+      toast("Envoi de l'image…");
       const r = await fetch("/api/admin/logo", { method: "POST", body: f, headers: { "Content-Type": f.type } });
       const d = await r.json();
       if (!r.ok) throw new Error(d.erreur);
-      if (pourStand) brouillon.espaces[sel].logo = d.url; else brouillon.espaces[sel].solutions[j].logo = d.url;
-      modifie(); rendreEdition(); toast("Logo ajouté.");
-    } catch (e) { toast("Logo non envoyé : " + e.message); }
+      if (pourStand) brouillon.espaces[sel][ev.target.dataset.fichierStand === "image" ? "image" : "logo"] = d.url; else brouillon.espaces[sel].solutions[j].logo = d.url;
+      modifie(); rendreEdition(); toast("Image ajoutée.");
+    } catch (e) { toast("Image non envoyée : " + e.message); }
   });
   edition.addEventListener("click", async (ev) => {
     const e = brouillon.espaces[sel];
@@ -296,8 +308,10 @@
       case "sol-monter": echanger(S, j, j - 1); break;
       case "sol-descendre": echanger(S, j, j + 1); break;
       case "sol-supprimer": S.splice(j, 1); break;
-      case "logo-stand": return $("#edition [data-fichier-stand]").click();
+      case "logo-stand": return $('#edition [data-fichier-stand="logo"]').click();
       case "logo-stand-retirer": e.logo = ""; break;
+      case "image-stand": return $('#edition [data-fichier-stand="image"]').click();
+      case "image-stand-retirer": e.image = ""; break;
       case "logo": return sEl.querySelector("[data-fichier]").click();
       case "logo-retirer": S[j].logo = ""; break;
       case "pictos": return sEl.querySelector(".pictos").classList.toggle("ouvert");

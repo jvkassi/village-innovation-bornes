@@ -144,6 +144,8 @@
     $("veille-liste").innerHTML = acc ? "" : sols().map((x) => `<li><span class="pict">${picto(x.icone)}</span>${esc(x.nom)}</li>`).join("");
   }
 
+  const puces = (l, n) => (Array.isArray(l) ? l : []).slice(0, n).map((a) => `<li>${esc(a)}</li>`).join("");
+
   function rendreExposant() {
     const e = espace, s = sols();
     $("ex-stand").textContent = e.numero ? `Stand ${e.numero}` : "";
@@ -152,6 +154,7 @@
     $("ex-nom").textContent = e.nom;
     $("ex-accroche").textContent = e.accroche || "";
     $("ex-presentation").textContent = e.presentation || "";
+    $("ex-activites").innerHTML = puces(e.activites, 4);
     $("ex-essayer").classList.toggle("masque", !s.length);
     const nav = $("panneaux");
     nav.dataset.n = s.length;
@@ -255,7 +258,7 @@
   function ouvrirFeuille() { etat = "feuille"; $("feuille").classList.add("ouverte"); $("feuille").setAttribute("aria-hidden", "false"); armer(); }
   function message(titre, texte) {
     ["f-stand", "f-theme", "f-accroche"].forEach((id) => ($(id).textContent = ""));
-    $("f-titre").textContent = titre; $("f-texte").textContent = texte; $("f-qr").innerHTML = "";
+    $("f-titre").textContent = titre; $("f-texte").textContent = texte; $("f-activites").innerHTML = ""; $("f-qr").innerHTML = "";
     ouvrirFeuille();
   }
   function fiche(e) {
@@ -264,6 +267,7 @@
     $("f-titre").textContent = e.nom;
     $("f-accroche").textContent = e.accroche || "";
     $("f-texte").textContent = e.presentation || "";
+    $("f-activites").innerHTML = puces(e.activites, 4);
     $("f-qr").innerHTML = `<div class="qr">${qr(lienApp(e.id))}</div><small><b>Sur votre téléphone</b>La fiche, les contacts et le chemin jusqu'au stand${e.numero ? " " + esc(e.numero) : ""}.</small>`;
     ouvrirFeuille();
   }

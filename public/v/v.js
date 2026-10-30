@@ -105,7 +105,7 @@
     const t = recherche.trim().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
     const norm = (s) => String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
     const res = exposants().filter((e) => (!filtre || e.thematique === filtre) &&
-      (!t || [e.nom, e.accroche, e.presentation, e.thematique, ...(e.solutions || []).map((s) => s.nom + " " + s.description)].some((x) => norm(x).includes(t))));
+      (!t || [e.nom, e.nomComplet, e.accroche, e.presentation, e.thematique, ...(e.activites || []), ...(e.solutions || []).map((s) => s.nom + " " + s.description)].some((x) => norm(x).includes(t))));
     $("#compte").textContent = res.length ? `${res.length} exposant${res.length > 1 ? "s" : ""}` : "";
     l.innerHTML = res.length ? res.map(ligneExposant).join("") : `<li class="vide">Aucun exposant ne correspond à « ${esc(recherche)} ».</li>`;
   }
@@ -128,6 +128,7 @@
       <div class="fiche-tete">${e.numero ? `<span class="stand">Stand ${esc(e.numero)}</span>` : ""}<span class="theme">${esc(e.thematique || "")}</span></div>
       ${e.logo ? `<div class="fiche-logo"><img src="${esc(e.logo)}" alt="Logo ${esc(e.nom)}"></div>` : ""}
       <h1>${esc(e.nom)}</h1>
+      ${e.nomComplet && e.nomComplet !== e.nom ? `<p class="nom-complet">${esc(e.nomComplet)}</p>` : ""}
       ${e.accroche ? `<p class="accroche">${esc(e.accroche)}</p>` : ""}
       ${e.presentation ? `<p class="pres">${esc(e.presentation)}</p>` : ""}
       <div class="actions">
@@ -135,7 +136,10 @@
         <a class="btn" href="#/plan?s=${encodeURIComponent(e.id)}">${I.plan}Voir sur le plan</a>
         ${navigator.share ? `<button class="btn large" data-partager="${esc(e.id)}">${I.partage}Partager</button>` : ""}
       </div>
-      ${sols.length ? `<h2 class="section">À découvrir</h2><ul class="contacts" style="border:0">${sols.map((s) => `<li><a class="sol" href="${esc(s.url.startsWith("/") ? s.url : s.url)}" target="_blank" rel="noopener"><span><b>${esc(s.nom)}</b>${s.description ? `<small>${esc(s.description)}</small>` : ""}</span><span class="go">${I.fleche}</span></a></li>`).join("")}</ul>` : ""}
+      ${e.image ? `<figure class="apercu"><img src="${esc(e.image)}" alt="Aperçu du service en ligne de ${esc(e.nom)}" loading="lazy"><figcaption>${esc(site || e.nom)}</figcaption></figure>` : ""}
+      ${(e.activites || []).length ? `<h2 class="section">Ce que fait ${esc(e.nom)}</h2><ul class="activites">${e.activites.map((a) => `<li>${esc(a)}</li>`).join("")}</ul>` : ""}
+      ${sols.length ? `<h2 class="section">À découvrir</h2><ul class="contacts" style="border:0">${sols.map((s) => `<li><a class="sol" href="${esc(s.url)}" target="_blank" rel="noopener">${s.apercu ? `<img class="vignette" src="${esc(s.apercu)}" alt="" loading="lazy">` : ""}<span><b>${esc(s.nom)}</b>${s.description ? `<small>${esc(s.description)}</small>` : ""}</span><span class="go">${I.fleche}</span></a></li>`).join("")}</ul>` : ""}
+      ${(e.reperes || []).length ? `<h2 class="section">Repères</h2><ul class="reperes">${e.reperes.map((r) => `<li>${esc(r.texte)}${r.source ? ` <a href="${esc(r.source)}" target="_blank" rel="noopener">Source</a>` : ""}</li>`).join("")}</ul>` : ""}
       ${site || e.email || e.telephone ? `<h2 class="section">Contacter</h2><div class="contacts">
         ${site ? `<a href="${esc(e.site)}" target="_blank" rel="noopener">${I.web}${esc(site)}</a>` : ""}
         ${e.email ? `<a href="mailto:${esc(e.email)}">${I.mail}${esc(e.email)}</a>` : ""}

@@ -63,7 +63,7 @@ ol,ul{list-style:none}
 .marque-ex img{max-height:100%;max-width:100%;object-fit:contain;display:block}
 .identite h1{font-weight:300;font-stretch:88%;font-size:calc(var(--u)*10.5);line-height:.92;letter-spacing:-.035em;text-wrap:balance;max-width:13ch;margin-top:calc(var(--u)*1.6)}
 .identite .accroche{margin-top:calc(var(--u)*2.6);font-size:calc(var(--u)*4.2);font-weight:500;line-height:1.2;letter-spacing:-.01em;max-width:28ch;text-wrap:balance}
-.identite .presentation{margin-top:calc(var(--u)*3);font-size:calc(var(--u)*3.2);line-height:1.45;color:var(--doux);max-width:52ch;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.identite .presentation{margin-top:calc(var(--u)*3);font-size:calc(var(--u)*3.2);line-height:1.45;color:var(--doux);max-width:52ch;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 
 .essayer{flex:none;display:flex;flex-direction:column;margin-top:calc(var(--u)*4.5)}
 .essayer h2{font-size:calc(var(--u)*3);font-weight:500;color:var(--doux);margin-bottom:calc(var(--u)*2)}
@@ -201,3 +201,10 @@ ol,ul{list-style:none}
 .config li button span{font-weight:400;font-size:calc(var(--u)*3);color:var(--doux);white-space:nowrap}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01s!important}}
+
+/* Ce que fait l'exposant */
+.activites:empty{display:none}
+.activites{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:calc(var(--u)*1.6) calc(var(--u)*5);margin-top:calc(var(--u)*3.6);max-width:calc(var(--u)*150)}
+.activites li{position:relative;padding-left:calc(var(--u)*3.4);font-size:calc(var(--u)*2.9);line-height:1.3;color:var(--clair)}
+.activites li::before{content:"";position:absolute;left:0;top:.5em;width:calc(var(--u)*1.4);height:calc(var(--u)*1.4);border-radius:2px;background:var(--cyan);transform:rotate(45deg)}
+.feuille .activites{grid-template-columns:1fr;margin-top:calc(var(--u)*3)}
