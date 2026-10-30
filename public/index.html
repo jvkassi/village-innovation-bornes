@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bornes d'accueil — Le Village de l'Innovation</title>
+<meta name="description" content="Maquettes interactives des bornes tablettes du Village de l'Innovation, Benin Digital & Innovation Week 2026.">
+<link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/Bricolage-Grotesque.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/kiosk.css">
+<style>
+  html,body{height:auto;overflow:auto}
+  body{-webkit-user-select:auto;user-select:auto}
+  .lumiere{position:absolute;height:1100px;-webkit-mask:linear-gradient(#000 55%,transparent);mask:linear-gradient(#000 55%,transparent)}
+  .page{position:relative;z-index:1;max-width:1360px;margin:0 auto;padding:0 32px}
+  .tete{padding:40px 0}
+  .tete .logo{height:52px;color:var(--clair)}
+  .intro{padding:72px 0 80px;display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:end}
+  .intro h1{font-weight:300;font-stretch:88%;font-size:clamp(48px,7.4vw,104px);line-height:.9;letter-spacing:-.04em}
+  .intro p{font-size:19px;line-height:1.55;color:var(--doux);max-width:46ch}
+  .intro p + p{margin-top:14px}
+  .intro strong{color:var(--clair);font-weight:600}
+  .bornes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+  figure{display:flex;flex-direction:column;gap:18px}
+  .tablette{padding:14px;border-radius:30px;background:#020a1c;border:1px solid rgba(243,246,251,.14);
+    box-shadow:0 40px 80px -30px rgba(0,0,0,.7),0 0 0 6px rgba(243,246,251,.03)}
+  .ecran-t{position:relative;aspect-ratio:820/1180;border-radius:16px;overflow:hidden;background:var(--nuit)}
+  .ecran-t iframe{position:absolute;left:0;top:0;width:820px;height:1180px;border:0;transform-origin:0 0}
+  .telephone{padding:10px;border-radius:34px;background:#020a1c;border:1px solid rgba(243,246,251,.14);box-shadow:0 40px 80px -30px rgba(0,0,0,.7);width:78%;margin:auto auto 0}
+  .ecran-p{position:relative;aspect-ratio:390/844;border-radius:26px;overflow:hidden;background:var(--nuit)}
+  .ecran-p iframe{position:absolute;left:0;top:0;width:390px;height:844px;border:0;transform-origin:0 0}
+  figcaption{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:0 4px}
+  figcaption b{font-weight:600;font-size:19px}
+  figcaption span{display:block;color:var(--doux);font-size:15px;margin-top:3px}
+  figcaption a{color:var(--cyan);font-weight:600;font-size:15px;text-decoration:underline;text-underline-offset:4px;white-space:nowrap}
+  section.suite{margin-top:120px;display:grid;grid-template-columns:1fr 2fr;gap:48px;padding-top:40px;border-top:1px solid var(--trait)}
+  section.suite h2{font-weight:300;font-stretch:88%;font-size:clamp(32px,3.6vw,48px);line-height:1;letter-spacing:-.03em}
+  dl{display:grid;grid-template-columns:1fr 1fr;column-gap:48px}
+  dl div{padding:22px 0;border-bottom:1px solid var(--trait)}
+  dt{font-weight:600;font-size:19px}
+  dd{color:var(--doux);font-size:16px;line-height:1.5;margin-top:6px;max-width:42ch}
+  .attendus{list-style:none}
+  .attendus li{display:flex;justify-content:space-between;gap:24px;padding:20px 0;border-bottom:1px solid var(--trait);font-size:17px}
+  .attendus em{font-style:normal;color:var(--doux);white-space:nowrap}
+  .attendus em.recu{color:var(--cyan)}
+  footer{margin-top:120px;padding:32px 0 56px;border-top:1px solid var(--trait);color:var(--doux);font-size:14px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  @media (max-width:1100px){.bornes{grid-template-columns:repeat(2,minmax(0,1fr))}.intro{grid-template-columns:1fr}}
+  @media (max-width:760px){section.suite{grid-template-columns:1fr}dl{grid-template-columns:1fr}}
+  @media (max-width:560px){.page{padding:0 16px}.bornes{grid-template-columns:1fr}.intro{padding:40px 0 56px}.attendus li{flex-direction:column;gap:4px}}
+</style>
+</head>
+<body>
+<div class="lumiere"></div>
+<div class="page">
+  <header class="tete"><div class="logo logo-side" role="img" aria-label="Le Village de l'Innovation"></div></header>
+
+  <section class="intro">
+    <h1>Les bornes et l'application du Village</h1>
+    <div>
+      <p>Chaque stand présente son exposant sur une tablette : qui il est, ce qu'il apporte, et un bouton pour essayer sa solution. Un QR code emporte la fiche sur le téléphone du visiteur, avec le programme et le plan du Village.</p>
+      <p><strong>Ces maquettes fonctionnent.</strong> Touchez-les pour les essayer. Les exposants présentés sont des exemples construits à partir d'informations publiques ; la veille démarre après 12 secondes sans toucher.</p>
+    </div>
+  </section>
+
+  <div class="bornes">
+    <figure>
+      <div class="tablette"><div class="ecran-t"><iframe title="Tablette d'accueil" src="/kiosk.html?espace=accueil&demo=1"></iframe></div></div>
+      <figcaption><div><b>Accueil du Village</b><span>Annuaire, programme, QR</span></div><a href="/kiosk.html?espace=accueil&demo=1" target="_blank" rel="noopener">Plein écran</a></figcaption>
+    </figure>
+    <figure>
+      <div class="tablette"><div class="ecran-t"><iframe title="Stand APIEx" src="/kiosk.html?espace=apiex&demo=1"></iframe></div></div>
+      <figcaption><div><b>Stand d'exposant</b><span>APIEx, 2 solutions</span></div><a href="/kiosk.html?espace=apiex&demo=1" target="_blank" rel="noopener">Plein écran</a></figcaption>
+    </figure>
+    <figure>
+      <div class="tablette"><div class="ecran-t"><iframe title="Stand ANIP" src="/kiosk.html?espace=anip&demo=1"></iframe></div></div>
+      <figcaption><div><b>Stand d'exposant</b><span>ANIP, 1 solution</span></div><a href="/kiosk.html?espace=anip&demo=1" target="_blank" rel="noopener">Plein écran</a></figcaption>
+    </figure>
+    <figure>
+      <div class="telephone"><div class="ecran-p"><iframe title="Application visiteur" src="/v/"></iframe></div></div>
+      <figcaption><div><b>Sur le téléphone</b><span>Exposants, programme, plan</span></div><a href="/v/" target="_blank" rel="noopener">Ouvrir</a></figcaption>
+    </figure>
+  </div>
+
+  <section class="suite">
+    <h2>Comment fonctionne une borne</h2>
+    <dl>
+      <div><dt>Présentation et essai</dt><dd>Chaque stand présente son exposant ; « Essayer » ouvre la solution en plein écran, site ou application installée.</dd></div>
+      <div><dt>Toujours un chemin de retour</dt><dd>Le navigateur kiosque garde un bouton Accueil visible et ramène à la borne après une minute sans toucher.</dd></div>
+      <div><dt>Remise à zéro</dt><dd>À chaque retour, le navigateur kiosque efface saisies, connexions et cookies du visiteur précédent.</dd></div>
+      <div><dt>Contenus modifiables par l'équipe</dt><dd>Un espace de gestion permet de modifier stands, services et logos, avec aperçu en direct. La publication arrive sur toutes les tablettes en une minute, sans les toucher.</dd></div>
+      <div><dt>Suivi en direct</dt><dd>L'équipe voit chaque tablette : en ligne ou non, batterie, visiteurs, services les plus ouverts. Export pour le bilan.</dd></div>
+      <div><dt>Le Village dans la poche</dt><dd>Sans rien installer : exposants, recherche, programme du jour, plan et « mes stands » sur le téléphone du visiteur.</dd></div>
+      <div><dt>Tient sans réseau</dt><dd>Si le Wi-Fi du salon tombe, la borne reste affichée et utilisable pour ce qui est déjà chargé.</dd></div>
+      <div><dt>Verrouillage de la tablette</dt><dd>Un navigateur kiosque sur chaque tablette : seuls la borne et les services du stand sont accessibles.</dd></div>
+    </dl>
+  </section>
+
+  <section class="suite">
+    <h2>Pour passer en production</h2>
+    <ul class="attendus">
+      <li><span>Charte graphique et logos du Village</span><em class="recu">Reçus</em></li>
+      <li><span>Liste des espaces, des services et des applications à installer</span><em>À recevoir</em></li>
+      <li><span>Inventaire des tablettes : nombre, modèles iPad ou Android, espace d'affectation</span><em>À recevoir</em></li>
+      <li><span>Fichiers de la police d'accroche de la charte</span><em>À recevoir</em></li>
+    </ul>
+  </section>
+
+  <footer><span>Benin Digital &amp; Innovation Week 2026, Le Village de l'Innovation</span><span>Maquettes proposées par Synelia</span></footer>
+</div>
+<script>
+  const ro = new ResizeObserver((es) => es.forEach((e) => { const f = e.target.querySelector("iframe"); f.style.transform = `scale(${e.contentRect.width / (e.target.classList.contains("ecran-p") ? 390 : 820)})`; }));
+  document.querySelectorAll(".ecran-t, .ecran-p").forEach((el) => ro.observe(el));
+</script>
+</body>
+</html>

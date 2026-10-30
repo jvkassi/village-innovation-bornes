@@ -1,0 +1,3 @@
+{ "name": "Le Village de l'Innovation", "short_name": "Le Village", "start_url": "/v/", "scope": "/v/", "display": "standalone",
+  "background_color": "#061430", "theme_color": "#061430",
+  "icons": [{ "src": "/brand/icon-512.png", "sizes": "512x512", "type": "image/png" }, { "src": "/brand/favicon.svg", "sizes": "any", "type": "image/svg+xml" }] }

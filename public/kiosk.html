@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#061430">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Le Village de l'Innovation</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/brand/icon-512.png">
+<link rel="preload" href="/fonts/Bricolage-Grotesque.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/Orbitron.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/kiosk.css">
+</head>
+<body>
+  <div class="lumiere"></div>
+
+  <!-- Stand d'exposant -->
+  <main class="ecran masque" id="ecran-exposant">
+    <header class="haut">
+      <div class="logo logo-side" role="img" aria-label="Le Village de l'Innovation"></div>
+      <div class="haut-d"><span class="stand" id="ex-stand"></span><time class="heure" data-heure></time></div>
+    </header>
+    <section class="identite">
+      <div class="marque-ex" id="ex-logo"></div>
+      <div class="theme" id="ex-theme"></div>
+      <h1 id="ex-nom"></h1>
+      <p class="accroche" id="ex-accroche"></p>
+      <p class="presentation" id="ex-presentation"></p>
+    </section>
+    <section class="essayer" id="ex-essayer">
+      <h2>À essayer ici</h2>
+      <nav class="panneaux" id="panneaux" aria-label="Solutions à essayer"></nav>
+    </section>
+    <footer class="poche">
+      <div class="qr" id="ex-qr"></div>
+      <div class="poche-t">
+        <b>Gardez ce stand dans votre poche</b>
+        <span>Scannez : la fiche, les contacts et le plan, sans rien installer.</span>
+        <small id="ex-contact"></small>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Tablette d'accueil -->
+  <main class="ecran masque" id="ecran-accueil">
+    <header class="haut">
+      <div class="logo logo-side" role="img" aria-label="Le Village de l'Innovation"></div>
+      <time class="heure" data-heure></time>
+    </header>
+    <section class="bienvenue">
+      <h1 id="ac-titre"></h1>
+      <p id="ac-texte"></p>
+    </section>
+    <section class="app-band">
+      <div class="qr" id="ac-qr"></div>
+      <div><b>Le Village sur votre téléphone</b><span>Exposants, programme et plan, sans rien installer.</span></div>
+    </section>
+    <section class="maintenant">
+      <h2 id="ac-prog-titre">Au programme</h2>
+      <ol id="ac-prog"></ol>
+    </section>
+    <section class="annuaire">
+      <h2>Les exposants <span id="ac-n"></span></h2>
+      <div class="filtres" id="ac-filtres"></div>
+      <ol id="ac-liste"></ol>
+    </section>
+  </main>
+  <div class="balayage" id="balayage"></div>
+
+  <!-- Fiche (depuis l'annuaire) ou application -->
+  <div class="feuille" id="feuille" aria-hidden="true" role="dialog">
+    <div class="boite">
+      <div class="feuille-tete"><span class="stand" id="f-stand"></span><span class="theme" id="f-theme"></span></div>
+      <h3 id="f-titre"></h3>
+      <p class="accroche" id="f-accroche"></p>
+      <p id="f-texte"></p>
+      <div class="qr-ligne" id="f-qr"></div>
+      <div class="actions">
+        <button class="btn-accueil" id="feuille-fermer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11 12 4l8.5 7"/><path d="M6 9.5V20h12V9.5"/></svg>
+          Fermer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Veille -->
+  <section class="veille" id="veille" aria-hidden="true">
+    <div class="lumiere"></div>
+    <div class="logo logo-icon embleme" aria-hidden="true"></div>
+    <header class="haut">
+      <div class="logo logo-side" aria-hidden="true"></div>
+      <time class="heure" data-heure></time>
+    </header>
+    <div class="bloc">
+      <div class="ici" id="veille-ici"></div>
+      <h2 id="veille-nom"></h2>
+      <p class="veille-acc" id="veille-acc"></p>
+      <ul id="veille-liste"></ul>
+      <div class="appel">
+        <div><b>Touchez l'écran pour commencer</b><span>Tap the screen to start</span></div>
+        <div class="doigt" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V10"/><path d="M12 9.5a1.5 1.5 0 0 1 3 0v1.5"/><path d="M15 10.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-.6a6 6 0 0 1-4.6-2.2L5 16.5a1.6 1.6 0 0 1 2.4-2.1L9 16V11"/></svg></div>
+      </div>
+      <p class="credit">Bornes réalisées par Synelia</p>
+    </div>
+  </section>
+
+  <div class="reseau masque" id="reseau"><i></i>Hors ligne, contenu en mémoire</div>
+
+  <script src="/vendor/qrcode.js"></script>
+  <script src="/assets/kiosk.js"></script>
+</body>
+</html>

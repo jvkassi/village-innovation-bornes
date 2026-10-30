@@ -1,0 +1,399 @@
+{
+  "_lisezmoi": "Contenu de repli (le contenu en ligne se gère depuis /admin). Exposants d'exemple construits à partir d'informations publiques ; programme indicatif.",
+  "evenement": {
+    "nom": "Le Village de l'Innovation",
+    "accroche": "Une micro-ville intelligente à construire ensemble",
+    "edition": "Benin Digital & Innovation Week 2026",
+    "dates": "18 – 20 novembre",
+    "horaires": "10 h – 19 h",
+    "lieu": "Palais des Congrès, Cotonou"
+  },
+  "minuteries": {
+    "retourAccueilSecondes": 60,
+    "veilleSecondes": 45
+  },
+  "programme": [
+    {
+      "jour": "2026-11-18",
+      "heure": "10:00",
+      "titre": "Ouverture du Village",
+      "lieu": "Tous les stands"
+    },
+    {
+      "jour": "2026-11-18",
+      "heure": "11:00",
+      "titre": "Visite guidée des services publics numériques",
+      "lieu": "Départ de l'accueil"
+    },
+    {
+      "jour": "2026-11-18",
+      "heure": "14:30",
+      "titre": "Atelier : créer son entreprise en ligne",
+      "lieu": "Stand APIEx"
+    },
+    {
+      "jour": "2026-11-18",
+      "heure": "19:00",
+      "titre": "Fermeture",
+      "lieu": ""
+    },
+    {
+      "jour": "2026-11-19",
+      "heure": "10:00",
+      "titre": "Ouverture du Village",
+      "lieu": "Tous les stands"
+    },
+    {
+      "jour": "2026-11-19",
+      "heure": "11:30",
+      "titre": "Atelier : ses démarches administratives en ligne",
+      "lieu": "Stand Services publics en ligne"
+    },
+    {
+      "jour": "2026-11-19",
+      "heure": "19:00",
+      "titre": "Fermeture",
+      "lieu": ""
+    },
+    {
+      "jour": "2026-11-20",
+      "heure": "10:00",
+      "titre": "Ouverture du Village",
+      "lieu": "Tous les stands"
+    },
+    {
+      "jour": "2026-11-20",
+      "heure": "16:00",
+      "titre": "Temps fort de clôture",
+      "lieu": "Accueil du Village"
+    },
+    {
+      "jour": "2026-11-20",
+      "heure": "19:00",
+      "titre": "Fermeture",
+      "lieu": ""
+    }
+  ],
+  "espaces": [
+    {
+      "id": "accueil",
+      "type": "accueil",
+      "numero": "",
+      "nom": "Accueil du Village",
+      "thematique": "",
+      "accroche": "Bienvenue au Village de l'Innovation",
+      "presentation": "Explorez les stands, le programme et le plan, ici ou sur votre téléphone.",
+      "site": "",
+      "email": "",
+      "telephone": "",
+      "logo": "",
+      "consigne": "",
+      "actif": true,
+      "solutions": []
+    },
+    {
+      "id": "service-public",
+      "type": "exposant",
+      "numero": "1",
+      "nom": "Services publics en ligne",
+      "thematique": "Services publics",
+      "accroche": "Les démarches administratives, en ligne.",
+      "presentation": "Le portail national service-public.bj réunit les démarches administratives des citoyens et des entreprises. La plateforme e-Visa permet de demander et de suivre un visa d'entrée au Bénin.",
+      "site": "https://service-public.bj/",
+      "email": "",
+      "telephone": "",
+      "logo": "",
+      "consigne": "Touchez un service pour l'essayer.",
+      "actif": true,
+      "solutions": [
+        {
+          "id": "service-public",
+          "nom": "Service-public.bj",
+          "description": "Le portail national des démarches administratives.",
+          "type": "web",
+          "url": "https://service-public.bj/",
+          "icone": "doc",
+          "logo": ""
+        },
+        {
+          "id": "evisa",
+          "nom": "e-Visa Bénin",
+          "description": "Demander et suivre son visa en ligne.",
+          "type": "web",
+          "url": "https://evisa.bj/",
+          "icone": "passport",
+          "logo": ""
+        }
+      ]
+    },
+    {
+      "id": "anip",
+      "type": "exposant",
+      "numero": "2",
+      "nom": "ANIP",
+      "thematique": "Services publics",
+      "accroche": "Identification des personnes et état civil numérique.",
+      "presentation": "L'Agence Nationale d'Identification des Personnes gère l'identification et l'état civil. En ligne : faire une demande, retrouver son NPI, mettre à jour son numéro ou sa photo, vérifier un document.",
+      "site": "https://anip.bj/",
+      "email": "contact@anip.bj",
+      "telephone": "",
+      "logo": "",
+      "consigne": "Touchez un service pour l'essayer.",
+      "actif": true,
+      "solutions": [
+        {
+          "id": "anip",
+          "nom": "Portail ANIP",
+          "description": "Retrouver son NPI, faire une demande, vérifier un document.",
+          "type": "web",
+          "url": "https://anip.bj/",
+          "icone": "id",
+          "logo": ""
+        }
+      ]
+    },
+    {
+      "id": "apiex",
+      "type": "exposant",
+      "numero": "3",
+      "nom": "APIEx",
+      "thematique": "Économie et finances",
+      "accroche": "Créer son entreprise, investir au Bénin.",
+      "presentation": "L'Agence de Promotion des Investissements et des Exportations accompagne les entrepreneurs et les investisseurs. Son guichet électronique MonEntreprise.bj permet de créer son entreprise en ligne.",
+      "site": "https://monentreprise.bj/",
+      "email": "contact@apiex.bj",
+      "telephone": "",
+      "logo": "",
+      "consigne": "Touchez un service pour l'essayer.",
+      "actif": true,
+      "solutions": [
+        {
+          "id": "monentreprise",
+          "nom": "MonEntreprise.bj",
+          "description": "Créer et gérer son entreprise en ligne.",
+          "type": "web",
+          "url": "https://monentreprise.bj/",
+          "icone": "building",
+          "logo": ""
+        },
+        {
+          "id": "investir",
+          "nom": "Investir au Bénin",
+          "description": "Le portail des investisseurs.",
+          "type": "web",
+          "url": "https://investbenin.bj/",
+          "icone": "route",
+          "logo": ""
+        }
+      ]
+    },
+    {
+      "id": "dgi",
+      "type": "exposant",
+      "numero": "4",
+      "nom": "Direction Générale des Impôts",
+      "thematique": "Économie et finances",
+      "accroche": "Les impôts, en ligne.",
+      "presentation": "La Direction Générale des Impôts présente ses services en ligne aux contribuables, particuliers et entreprises.",
+      "site": "https://www.impots.bj/",
+      "email": "",
+      "telephone": "",
+      "logo": "",
+      "consigne": "Touchez un service pour l'essayer.",
+      "actif": true,
+      "solutions": [
+        {
+          "id": "impots",
+          "nom": "Impôts en ligne",
+          "description": "Les services en ligne de la DGI.",
+          "type": "web",
+          "url": "https://www.impots.bj/",
+          "icone": "receipt",
+          "logo": ""
+        }
+      ]
+    },
+    {
+      "id": "dgtcp",
+      "type": "exposant",
+      "numero": "5",
+      "nom": "Trésor public (DGTCP)",
+      "thematique": "Économie et finances",
+      "accroche": "Les services en ligne du Trésor public.",
+      "presentation": "La Direction Générale du Trésor et de la Comptabilité Publique relève du Ministère de l'Économie et des Finances. Ses e-services : eQuittance pour le paiement en ligne, fiche de paie, fiche de pension, suivi des titres, eCollectivité.",
+      "site": "https://www.tresorbenin.bj/",
+      "email": "courriers@tresorbenin.bj",
+      "telephone": "",
+      "logo": "",
+      "consigne": "Touchez un service pour l'essayer.",
+      "actif": true,
+      "solutions": [
+        {
+          "id": "tresor",
+          "nom": "E-services du Trésor",
+          "description": "Paiement eQuittance, fiche de paie, fiche de pension.",
+          "type": "web",
+          "url": "https://www.tresorbenin.bj/",
+          "icone": "wallet",
+          "logo": ""
+        }
+      ]
+    },
+    {
+      "id": "educmaster",
+      "type": "exposant",
+      "numero": "6",
+      "nom": "EducMaster",
+      "thematique": "Éducation et santé",
+      "accroche": "Le système d'information de l'éducation.",
+      "presentation": "EducMaster est le portail national de l'éducation, porté par les ministères en charge de l'Éducation. Ce système d'information et de gestion couvre l'école, de la maternelle au secondaire.",
+      "site": "https://educmaster.bj/",
+      "email": "",
+      "telephone": "",
+      "logo": "",
+      "consigne": "Touchez un service pour l'essayer.",
+      "actif": true,
+      "solutions": [
+        {
+          "id": "educmaster",
+          "nom": "Portail EducMaster",
+          "description": "Primaire et secondaire, un référentiel national.",
+          "type": "web",
+          "url": "https://educmaster.bj/",
+          "icone": "school",
+          "logo": ""
+        }
+      ]
+    },
+    {
+      "id": "sante",
+      "type": "exposant",
+      "numero": "7",
+      "nom": "Ministère de la Santé",
+      "thematique": "Éducation et santé",
+      "accroche": "La santé publique, en ligne.",
+      "presentation": "Le portail officiel du Ministère de la Santé publie l'actualité, les programmes et les informations de santé publique, et renvoie vers les e-services de service-public.bj.",
+      "site": "https://sante.gouv.bj/",
+      "email": "sante.infos@gouv.bj",
+      "telephone": "",
+      "logo": "",
+      "consigne": "Touchez un service pour l'essayer.",
+      "actif": true,
+      "solutions": [
+        {
+          "id": "sante",
+          "nom": "Portail de la Santé",
+          "description": "Actualités, programmes et e-services de santé.",
+          "type": "web",
+          "url": "https://sante.gouv.bj/",
+          "icone": "pulse",
+          "logo": ""
+        }
+      ]
+    },
+    {
+      "id": "sbee",
+      "type": "exposant",
+      "numero": "8",
+      "nom": "SBEE",
+      "thematique": "Énergie et eau",
+      "accroche": "L'électricité : payer, recharger, se raccorder.",
+      "presentation": "La Société Béninoise d'Énergie Électrique distribue l'électricité au Bénin. En ligne : payer sa facture, recharger son compteur, demander un raccordement.",
+      "site": "https://sbee.bj/",
+      "email": "",
+      "telephone": "",
+      "logo": "",
+      "consigne": "Touchez un service pour l'essayer.",
+      "actif": true,
+      "solutions": [
+        {
+          "id": "sbee",
+          "nom": "Services en ligne SBEE",
+          "description": "Payer sa facture, recharger son compteur.",
+          "type": "web",
+          "url": "https://sbee.bj/",
+          "icone": "sun",
+          "logo": ""
+        }
+      ]
+    },
+    {
+      "id": "soneb",
+      "type": "exposant",
+      "numero": "9",
+      "nom": "SONEB",
+      "thematique": "Énergie et eau",
+      "accroche": "L'eau potable : vos factures en un clic.",
+      "presentation": "La Société Nationale des Eaux du Bénin, certifiée ISO 9001:2015, propose le paiement des factures d'eau en ligne et la demande de branchement.",
+      "site": "https://web.soneb.bj/",
+      "email": "",
+      "telephone": "",
+      "logo": "",
+      "consigne": "Touchez un service pour l'essayer.",
+      "actif": true,
+      "solutions": [
+        {
+          "id": "soneb",
+          "nom": "Espace clients SONEB",
+          "description": "Payer ses factures, demander un branchement.",
+          "type": "web",
+          "url": "https://web.soneb.bj/",
+          "icone": "leaf",
+          "logo": ""
+        }
+      ]
+    },
+    {
+      "id": "semecity",
+      "type": "exposant",
+      "numero": "10",
+      "nom": "Sèmè City",
+      "thematique": "Innovation et télécoms",
+      "accroche": "La cité internationale de l'innovation et du savoir.",
+      "presentation": "Sèmè City forme une nouvelle génération de talents, promeut l'entrepreneuriat innovant et accueille innovateurs et chercheurs. Sa mission : répondre aux enjeux d'employabilité des jeunes.",
+      "site": "https://semecity.bj/",
+      "email": "semecity@presidence.bj",
+      "telephone": "",
+      "logo": "",
+      "consigne": "Touchez un service pour l'essayer.",
+      "actif": true,
+      "solutions": [
+        {
+          "id": "semecity",
+          "nom": "Découvrir Sèmè City",
+          "description": "Formation, entrepreneuriat, innovation et recherche.",
+          "type": "web",
+          "url": "https://semecity.bj/",
+          "icone": "chip",
+          "logo": ""
+        }
+      ]
+    },
+    {
+      "id": "celtiis",
+      "type": "exposant",
+      "numero": "11",
+      "nom": "Celtiis",
+      "thematique": "Innovation et télécoms",
+      "accroche": "L'opérateur de télécommunications de la SBIN.",
+      "presentation": "Celtiis est l'opérateur de télécommunications de la Société Béninoise d'Infrastructures Numériques (SBIN), lancé comme troisième opérateur mobile du Bénin.",
+      "site": "https://www.celtiis.bj/",
+      "email": "",
+      "telephone": "",
+      "logo": "",
+      "consigne": "Touchez un service pour l'essayer.",
+      "actif": true,
+      "solutions": [
+        {
+          "id": "celtiis",
+          "nom": "Celtiis",
+          "description": "Offres et services de l'opérateur.",
+          "type": "web",
+          "url": "https://www.celtiis.bj/",
+          "icone": "phone",
+          "logo": ""
+        }
+      ]
+    }
+  ]
+}

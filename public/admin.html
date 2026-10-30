@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Gestion des bornes — Le Village de l'Innovation</title>
+<link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/Bricolage-Grotesque.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/admin.css">
+</head>
+<body>
+
+<!-- Connexion -->
+<section class="connexion" id="connexion" hidden>
+  <form id="form-connexion">
+    <div class="logo logo-side" role="img" aria-label="Le Village de l'Innovation"></div>
+    <h1>Gestion des bornes</h1>
+    <p>Accès réservé à l'équipe du Village.</p>
+    <label>Mot de passe<input type="password" id="mdp" autocomplete="current-password" required></label>
+    <button class="btn principal" type="submit">Se connecter</button>
+    <p class="erreur" id="err-connexion" role="alert"></p>
+  </form>
+</section>
+
+<!-- Application -->
+<div class="app" id="app" hidden>
+  <header class="tete">
+    <div class="marque"><div class="logo logo-icon" aria-hidden="true"></div><b>Bornes du Village</b></div>
+    <nav class="onglets" role="tablist">
+      <button role="tab" data-onglet="stands" aria-selected="true">Stands</button>
+      <button role="tab" data-onglet="programme" aria-selected="false">Programme</button>
+      <button role="tab" data-onglet="suivi" aria-selected="false">Suivi en direct <span class="pastille-n" id="n-hors"></span></button>
+      <button role="tab" data-onglet="reglages" aria-selected="false">Événement</button>
+    </nav>
+    <div class="actions-tete">
+      <span class="etat-pub" id="etat-pub"></span>
+      <a class="btn" href="/v/" target="_blank" rel="noopener">App visiteur</a>
+      <button class="btn" id="btn-historique">Historique</button>
+      <button class="btn principal" id="btn-publier" disabled>Publier sur les bornes</button>
+      <button class="btn discret" id="btn-sortir" title="Se déconnecter">Sortir</button>
+    </div>
+  </header>
+
+  <!-- Stands -->
+  <main class="onglet" id="onglet-stands">
+    <aside class="liste">
+      <div class="liste-tete"><h2>Stands <span id="n-stands"></span></h2><button class="btn" id="btn-ajout-stand">Ajouter</button></div>
+      <ol id="liste-stands"></ol>
+    </aside>
+
+    <section class="edition" id="edition"></section>
+
+    <aside class="apercu">
+      <div class="apercu-tete">
+        <h2>Aperçu</h2>
+        <div class="segment" role="radiogroup" aria-label="Écran prévisualisé">
+          <button role="radio" aria-checked="true" data-ecran="">Accueil</button>
+          <button role="radio" aria-checked="false" data-ecran="veille">Veille</button>
+        </div>
+      </div>
+      <div class="tablette"><div class="ecran-t"><iframe id="apercu" title="Aperçu de la borne"></iframe></div></div>
+      <p class="note">Ce que verra le visiteur. Les bornes reçoivent les changements dans la minute qui suit la publication.</p>
+    </aside>
+  </main>
+
+  <!-- Programme -->
+  <main class="onglet prog" id="onglet-programme" hidden>
+    <div class="prog-tete">
+      <div><h2>Programme du Village</h2><p>Affiché sur la tablette d'accueil et dans l'application visiteur. Publié avec le reste.</p></div>
+      <button class="btn" id="btn-ajout-session">Ajouter une session</button>
+    </div>
+    <table class="prog-table">
+      <thead><tr><th>Jour</th><th>Heure</th><th>Titre</th><th>Lieu</th><th></th></tr></thead>
+      <tbody id="prog-lignes"></tbody>
+    </table>
+  </main>
+
+  <!-- Suivi -->
+  <main class="onglet suivi" id="onglet-suivi" hidden>
+    <div class="suivi-tete">
+      <div>
+        <h2>Le Village en direct</h2>
+        <p id="suivi-maj">Mise à jour automatique toutes les 30 secondes.</p>
+      </div>
+      <div class="filtres">
+        <select id="suivi-jour" aria-label="Journée"></select>
+        <button class="btn" id="btn-export">Exporter (CSV)</button>
+      </div>
+    </div>
+    <div class="chiffres" id="chiffres"></div>
+    <div class="suivi-grille">
+      <section>
+        <h3>Tablettes</h3>
+        <table class="tableau" id="tab-tablettes">
+          <thead><tr><th>Tablette</th><th>Stand</th><th>État</th><th>Batterie</th><th class="num">Visiteurs</th><th class="num">Ouvertures</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <p class="vide" id="vide-tablettes" hidden>Aucune tablette n'a encore été installée. Ouvrez un stand et utilisez « Installer sur une tablette ».</p>
+      </section>
+      <section>
+        <h3>Solutions les plus ouvertes sur les bornes</h3>
+        <ol class="classement" id="classement"></ol>
+        <h3 style="margin-top:22px">Fiches les plus consultées sur téléphone</h3>
+        <ol class="classement" id="classement-app"></ol>
+      </section>
+    </div>
+  </main>
+
+  <!-- Réglages -->
+  <main class="onglet reglages" id="onglet-reglages" hidden>
+    <form id="form-evenement" class="carte-form">
+      <h2>Informations affichées sur toutes les bornes</h2>
+      <div class="champs-2">
+        <label>Nom<input name="nom" maxlength="80"></label>
+        <label>Édition<input name="edition" maxlength="100"></label>
+        <label class="large">Accroche<input name="accroche" maxlength="140"></label>
+        <label>Dates<input name="dates" maxlength="60" placeholder="18 – 20 novembre"></label>
+        <label>Horaires<input name="horaires" maxlength="40" placeholder="10 h – 19 h"></label>
+        <label class="large">Lieu<input name="lieu" maxlength="100"></label>
+      </div>
+      <h2>Comportement</h2>
+      <div class="champs-2">
+        <label>Retour à la borne après inactivité sur une solution
+          <span class="unite"><input name="retourAccueilSecondes" type="number" min="20" max="600" step="5"> secondes</span>
+          <small>Valeur à reporter dans le navigateur kiosque de chaque tablette, qui applique le retour.</small></label>
+        <label>Passage en veille à l'accueil
+          <span class="unite"><input name="veilleSecondes" type="number" min="15" max="600" step="5"> secondes</span>
+          <small>L'écran de veille présente le stand et invite à toucher.</small></label>
+      </div>
+    </form>
+  </main>
+</div>
+
+<!-- Dialogues -->
+<dialog id="dlg-installer">
+  <h2>Installer sur une tablette</h2>
+  <p>Sur la tablette du stand, scannez ce code avec l'appareil photo ou saisissez l'adresse dans le navigateur kiosque. La tablette mémorise son stand.</p>
+  <div class="installer"><div id="qr-installer"></div><div><code id="url-installer"></code><button class="btn" id="btn-copier">Copier l'adresse</button></div></div>
+  <form method="dialog"><button class="btn">Fermer</button></form>
+</dialog>
+
+<dialog id="dlg-historique">
+  <h2>Publications</h2>
+  <p>Chaque publication est conservée. Restaurer une version la republie aussitôt sur les bornes.</p>
+  <ol class="versions" id="versions"></ol>
+  <form method="dialog"><button class="btn">Fermer</button></form>
+</dialog>
+
+<dialog id="dlg-erreurs">
+  <h2>Publication impossible</h2>
+  <p>Corrigez ces points puis publiez à nouveau :</p>
+  <ul id="liste-erreurs"></ul>
+  <form method="dialog"><button class="btn principal">Compris</button></form>
+</dialog>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="/vendor/qrcode.js"></script>
+<script src="/assets/admin.js"></script>
+</body>
+</html>
