@@ -3,8 +3,13 @@
   const $ = (s, r = document) => r.querySelector(s);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const TZ = "Africa/Porto-Novo";
-  const jour = () => new Intl.DateTimeFormat("en-CA", { timeZone: TZ }).format(new Date());
-  const heure = () => new Intl.DateTimeFormat("fr-FR", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: TZ }).format(new Date());
+  // ?simule=2026-11-18T11:20 : horloge positionnée au jour J (page /maquettes)
+  const P = new URLSearchParams(location.search);
+  const DECALAGE = (() => { const v = P.get("simule"); if (!v) return 0; const t = Date.parse(v + ":00+01:00"); return isNaN(t) ? 0 : t - Date.now(); })();
+  const MAQUETTE = P.has("maquette");
+  const maintenant = () => new Date(Date.now() + DECALAGE);
+  const jour = () => new Intl.DateTimeFormat("en-CA", { timeZone: TZ }).format(maintenant());
+  const heure = () => new Intl.DateTimeFormat("fr-FR", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: TZ }).format(maintenant());
   const fmtJour = (d, o) => new Intl.DateTimeFormat("fr-FR", { timeZone: "UTC", ...o }).format(new Date(d + "T12:00:00Z"));
   const I = {
     fleche: '<svg viewBox="0 0 24 24"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></svg>',
@@ -93,7 +98,7 @@
       ${themes.length > 1 ? `<div class="puces" role="group" aria-label="Thématiques">${[["", "Tous"], ...themes.map((t) => [t, t])].map(([v, l]) => `<button data-theme="${esc(v)}" aria-pressed="${v === filtre}">${esc(l)}</button>`).join("")}</div>` : ""}
       <h2 class="section" id="compte"></h2>
       <ol class="liste" id="liste"></ol>
-      <p class="pied">Contenus fournis par les exposants et l'organisation, susceptibles d'évoluer pendant l'événement.</p>`;
+      <p class="pied">Une initiative du Ministère de la Transformation Digitale et de l'Innovation.</p>`;
   }
   function filtrerListe() {
     const l = $("#liste"); if (!l) return;
@@ -107,6 +112,7 @@
 
   function compterVue(id) {
     // Une consultation par exposant et par visiteur dans la journée
+    if (MAQUETTE) return;
     const cle = "village.vu." + id + "." + jour();
     try { if (localStorage.getItem(cle)) return; localStorage.setItem(cle, "1"); } catch {}
     try { navigator.sendBeacon("/api/vue", new Blob([JSON.stringify({ exposant: id })], { type: "application/json" })); } catch {}

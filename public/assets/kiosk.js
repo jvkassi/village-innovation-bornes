@@ -9,14 +9,18 @@
 (() => {
   const q = new URLSearchParams(location.search);
   const DEMO = q.has("demo");
+  const MAQUETTE = q.has("maquette"); // page /maquettes : comportement réel, sans télémétrie
+  // ?simule=2026-11-18T11:20 : horloge du Bénin positionnée au jour J (maquettes), qui continue de tourner
+  const DECALAGE = (() => { const v = q.get("simule"); if (!v) return 0; const t = Date.parse(v + ":00+01:00"); return isNaN(t) ? 0 : t - Date.now(); })();
+  const maintenant = () => new Date(Date.now() + DECALAGE);
   const APERCU = q.has("apercu");
-  const MESURE = !DEMO && !APERCU;
+  const MESURE = !DEMO && !APERCU && !MAQUETTE;
   const FULLY = typeof window.fully !== "undefined";
   const DANS_UN_CADRE = window.self !== window.parent;
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const absolue = (u) => new URL(u, location.origin).href;
-  const lienApp = (id) => `${location.origin}/v/${id ? "#/exposant/" + encodeURIComponent(id) : ""}`;
+  const lienApp = (id) => `${location.origin}/${id ? "#/exposant/" + encodeURIComponent(id) : ""}`;
 
   /* ---------- Pictogrammes (trait 1.5, grille 24) ---------- */
   const P = {
@@ -47,8 +51,8 @@
   const memoire = (() => { try { return JSON.parse(localStorage.getItem(CLE)) || {}; } catch { return {}; } })();
   const sauver = () => { try { localStorage.setItem(CLE, JSON.stringify(memoire)); } catch {} };
   if (!memoire.id) { memoire.id = "t" + Math.random().toString(36).slice(2, 10); sauver(); }
-  const jour = () => new Intl.DateTimeFormat("en-CA", { timeZone: "Africa/Porto-Novo" }).format(new Date());
-  const heureMaintenant = () => new Intl.DateTimeFormat("fr-FR", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Africa/Porto-Novo" }).format(new Date());
+  const jour = () => new Intl.DateTimeFormat("en-CA", { timeZone: "Africa/Porto-Novo" }).format(maintenant());
+  const heureMaintenant = () => new Intl.DateTimeFormat("fr-FR", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Africa/Porto-Novo" }).format(maintenant());
 
   let cfg, espace, tInactif, tApp, tVeilleListe;
   let etat = "accueil"; // accueil | feuille | solution | veille
@@ -119,7 +123,7 @@
   /* ---------- Heure du Bénin ---------- */
   function horloge() {
     const fh = new Intl.DateTimeFormat("fr-FR", { hour: "2-digit", minute: "2-digit", timeZone: "Africa/Porto-Novo" });
-    const maj = () => { const d = new Date(); document.querySelectorAll("[data-heure]").forEach((t) => { t.textContent = fh.format(d); t.dateTime = d.toISOString(); }); };
+    const maj = () => { const d = maintenant(); document.querySelectorAll("[data-heure]").forEach((t) => { t.textContent = fh.format(d); t.dateTime = d.toISOString(); }); };
     maj(); setInterval(() => { maj(); if (espace?.type === "accueil" && etat !== "solution") rendreProgramme(); }, 30_000);
   }
 
@@ -225,7 +229,7 @@
   function ouvrir(s) {
     if (s.type === "app") return ouvrirApp(s);
     const url = absolue(s.url);
-    if (DEMO || APERCU || DANS_UN_CADRE) { window.open(url, "_blank", "noopener"); return; }
+    if (DEMO || APERCU || MAQUETTE || DANS_UN_CADRE) { window.open(url, "_blank", "noopener"); return; }
     etat = "solution";
     clearTimeout(tInactif);
     signalerSortie(s.id);
@@ -236,7 +240,7 @@
   function ouvrirApp(s) {
     const ios = /iPad|iPhone|Macintosh/.test(navigator.userAgent) && "ontouchend" in document;
     const lien = ios ? s.ios : s.android ? `intent://#Intent;package=${s.android};end` : null;
-    if (lien && !DEMO && !APERCU) {
+    if (lien && !DEMO && !APERCU && !MAQUETTE) {
       let parti = false;
       document.addEventListener("visibilitychange", () => { if (document.hidden) parti = true; }, { once: true });
       signalerSortie(s.id);
@@ -381,5 +385,5 @@
     });
   }
 
-  if ("serviceWorker" in navigator && MESURE) navigator.serviceWorker.register("/sw.js").catch(() => {});
+  if ("serviceWorker" in navigator && MESURE && !DECALAGE) navigator.serviceWorker.register("/sw.js").catch(() => {});
 })();

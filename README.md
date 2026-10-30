@@ -5,9 +5,9 @@ Bornes tablettes, application visiteur et back-office du **Village de l'Innovati
 | Adresse | Rôle |
 | --- | --- |
 | `/kiosk.html` | Borne de stand (présentation de l'exposant, « Essayer », QR) ou tablette d'accueil (annuaire, programme) |
-| `/v/` | Application visiteur sur téléphone : exposants, fiche, programme, plan, mes stands |
+| `/` | Application du public sur téléphone : exposants, fiche, programme, plan, mes stands (aussi servie sous `/v/`) |
 | `/admin` | Back-office : exposants, programme, publication, historique, suivi en direct des tablettes |
-| `/` | Page de présentation des maquettes |
+| `/maquettes` | Maquettes présentées comme le jour J (horloge simulée au 18 novembre, 11 h 20) |
 
 ## Architecture
 
