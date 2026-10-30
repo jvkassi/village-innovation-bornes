@@ -34,3 +34,7 @@ vercel env pull .env.local
 node scripts/migrer.mjs   # crée le schéma (idempotent)
 vercel dev
 ```
+
+## Déploiement
+
+Chaque push sur `main` déploie en production sur Vercel (https://village-innovation-bornes.vercel.app).
